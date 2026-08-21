@@ -3,11 +3,17 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+
+app.use('/', (req, res, next) => {
+    res.json({ message: "Welcome to the API" });
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
