@@ -11,14 +11,19 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-app.use('/', (req, res, next) => {
-    res.json({ message: "Welcome to the API" });
-});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+
+
+//Comment Section
 app.use("/api/comments", commentRoutes);
+
+//Middleware
+app.use('/', (req, res, next) => {
+    res.json({ message: "Welcome to the API" });
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
