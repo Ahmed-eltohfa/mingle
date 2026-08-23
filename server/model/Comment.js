@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema(
     {
-        content:{
+        content: {
             type: String,
             required: true,
             trim: true,
@@ -10,19 +10,19 @@ const commentSchema = new mongoose.Schema(
             maxlength: 500
         },
 
-        user:{
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true
         },
 
-        post:{
+        post: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
             required: true
         },
 
-        parentComment:{
+        parentComment: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment",
             default: null
@@ -35,12 +35,13 @@ const commentSchema = new mongoose.Schema(
             }
         ],
 
-        isDeletd: {
+        isDeleted: {
             type: Boolean,
-            default: false
+            default: false,
+            index: true
         },
 
-        deletedAt:{
+        deletedAt: {
             type: Date,
             default: null
         }
