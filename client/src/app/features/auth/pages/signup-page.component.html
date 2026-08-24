@@ -1,0 +1,77 @@
+<section class="signup-page">
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="orb orb-left" aria-hidden="true"></div>
+    <div class="orb orb-right" aria-hidden="true"></div>
+
+    <main class="mingle-card signup-card">
+        <header>
+            <h1>Mingle</h1>
+            <h2>Create account</h2>
+            <p>Start building your network and share your ideas.</p>
+        </header>
+
+        <form [formGroup]="signupForm" (ngSubmit)="submit()" novalidate>
+            <label for="fullName">Full name</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">person</span>
+                <input id="fullName" class="mingle-focus" formControlName="fullName" type="text"
+                    placeholder="Alex Mercer" autocomplete="name" />
+            </div>
+
+            <label for="username">Username</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">alternate_email</span>
+                <input id="username" class="mingle-focus" formControlName="username" type="text"
+                    placeholder="alexmercer" autocomplete="username" />
+            </div>
+
+            <label for="email">Email address</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">mail</span>
+                <input id="email" class="mingle-focus" formControlName="email" type="email"
+                    placeholder="name@example.com" autocomplete="email" />
+            </div>
+
+            <label for="password">Password</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">lock</span>
+                <input id="password" class="mingle-focus" formControlName="password"
+                    [type]="isPasswordVisible() ? 'text' : 'password'" placeholder="••••••••"
+                    autocomplete="new-password" />
+            </div>
+
+            <label for="confirmPassword">Confirm password</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">verified_user</span>
+                <input id="confirmPassword" class="mingle-focus" formControlName="confirmPassword"
+                    [type]="isPasswordVisible() ? 'text' : 'password'" placeholder="••••••••"
+                    autocomplete="new-password" />
+                <button type="button" class="visibility" (click)="togglePasswordVisibility()"
+                    aria-label="Toggle password visibility">
+                    <span class="material-symbols-outlined">
+                        {{ isPasswordVisible() ? 'visibility_off' : 'visibility' }}
+                    </span>
+                </button>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" formControlName="acceptTerms" />
+                I agree to terms and privacy policy.
+            </label>
+
+            @if (formError()) {
+            <small class="error-message">{{ formError() }}</small>
+            }
+
+            <button class="mingle-button-primary submit" type="submit" [disabled]="isSubmitting()">
+                {{ isSubmitting() ? 'Creating account...' : 'Create account' }}
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </form>
+
+        <p class="footer-copy">
+            Already have an account?
+            <a routerLink="/login">Login</a>
+        </p>
+    </main>
+</section>

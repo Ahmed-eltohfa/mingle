@@ -1,0 +1,19 @@
+<div class="social-shell">
+    <app-side-nav></app-side-nav>
+
+    <div class="main-panel">
+        <app-top-bar></app-top-bar>
+
+        <div class="content-grid">
+            <main class="content-column">
+                <router-outlet></router-outlet>
+            </main>
+
+            <div class="rail-column">
+                <app-right-rail [variant]="railVariant()"></app-right-rail>
+            </div>
+        </div>
+    </div>
+
+    <app-bottom-nav></app-bottom-nav>
+</div>

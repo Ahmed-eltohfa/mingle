@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mingle - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c7c4d7",
+                      "on-tertiary-container": "#fffbff",
+                      "on-surface": "#0b1c30",
+                      "tertiary-fixed-dim": "#ffb783",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#703700",
+                      "surface-container-highest": "#d3e4fe",
+                      "primary": "#4648d4",
+                      "surface-container": "#e5eeff",
+                      "tertiary-container": "#b55d00",
+                      "surface-container-high": "#dce9ff",
+                      "secondary-fixed-dim": "#89ceff",
+                      "primary-fixed": "#e1e0ff",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#f8f9ff",
+                      "on-background": "#0b1c30",
+                      "surface-container-low": "#eff4ff",
+                      "on-secondary-container": "#004666",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "primary-container": "#6063ee",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#006591",
+                      "surface-bright": "#f8f9ff",
+                      "surface-tint": "#494bd6",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#39b8fd",
+                      "secondary-fixed": "#c9e6ff",
+                      "on-primary-container": "#fffbff",
+                      "on-surface-variant": "#464554",
+                      "inverse-on-surface": "#eaf1ff",
+                      "inverse-primary": "#c0c1ff",
+                      "on-secondary-fixed": "#001e2f",
+                      "tertiary": "#904900",
+                      "on-tertiary-fixed": "#301400",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "background": "#f8f9ff",
+                      "tertiary-fixed": "#ffdcc5",
+                      "inverse-surface": "#213145",
+                      "surface-variant": "#d3e4fe",
+                      "outline": "#767586",
+                      "on-primary-fixed": "#07006c",
+                      "surface-dim": "#cbdbf5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-xs": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-xs": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+      </style>
+</head>
+<body class="min-h-screen bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center px-margin-mobile w-full h-16 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md text-primary dark:text-primary-fixed border-b border-outline-variant dark:border-outline shadow-sm font-body-md text-body-md">
+<div class="font-display-lg-mobile text-display-lg-mobile font-bold text-primary dark:text-primary-fixed">Mingle</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-low active:scale-95 duration-200 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low active:scale-95 duration-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low active:scale-95 duration-200 transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</button>
+</div>
+</header>
+<div class="flex max-w-[1280px] mx-auto min-h-screen">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full p-md gap-sm bg-surface dark:bg-surface-dim text-primary dark:text-primary-fixed font-label-sm text-label-sm border-r border-outline-variant dark:border-outline docked left-0 h-screen w-64 flat no shadows z-40">
+<div class="px-md py-lg">
+<h1 class="font-display-lg text-display-lg font-black text-primary">Mingle</h1>
+<p class="text-on-surface-variant font-label-sm mt-1">Social Network</p>
+</div>
+<nav class="flex-1 flex flex-col gap-xs mt-lg">
+<a class="flex items-center gap-md bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-md py-sm font-bold hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                    Home
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">explore</span>
+                    Explore
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">add_box</span>
+                    Create
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                    Notifications
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">mail</span>
+                    Messages
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Profile
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+                    Saved
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1 duration-200 mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<button class="mt-lg w-full bg-primary text-on-primary py-sm px-md rounded-full font-label-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+                Create Post
+            </button>
+</aside>
+<!-- Main Feed Content -->
+<main class="flex-1 lg:ml-64 w-full px-margin-mobile md:px-margin-desktop py-lg max-w-[800px] xl:max-w-[700px]">
+<!-- Create Post Box -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow mb-lg">
+<div class="flex gap-md">
+<img class="w-12 h-12 rounded-full border-2 border-surface object-cover shrink-0" data-alt="A close up portrait of a young professional woman smiling warmly in a brightly lit modern office environment. High quality, clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgGteqNMdREtgagAz_KlVIiZYxQpkkc3JdmXyVYVH0NhQOpNmWXvuyM1McM6XSfCoFoiqBR52zuZLEkUdDzGUsUtw3IqdIqu6Jcu2W87zX8UkWN3SL3GLdxnfb_fhkN66ZqyXThfRr4XxyStceclHaGTdSr9Pj0o1CaChc50wUbe5RpwQ3ML-BVQswwjjZBJkJqZy6GzliIucP4Qh3CHCyaxMP00M04dXFNBVWHo-esdsGl07ZRBc"/>
+<div class="flex-1">
+<textarea aria-label="Create Post Input" class="w-full bg-transparent border-none focus:ring-0 text-body-lg font-body-lg text-on-surface placeholder:text-outline resize-none h-20" placeholder="What's on your mind?"></textarea>
+</div>
+</div>
+<div class="border-t border-outline-variant mt-sm pt-sm flex justify-between items-center">
+<div class="flex gap-sm">
+<button aria-label="Upload Image" class="text-primary p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button aria-label="Upload Video" class="text-primary p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="text-primary flex items-center gap-xs px-3 py-1 rounded-full hover:bg-surface-container-low transition-colors text-label-sm font-label-sm ml-2">
+<span class="material-symbols-outlined text-[18px]">public</span> Everyone
+                        </button>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                        Post
+                    </button>
+</div>
+</div>
+<!-- Feed Stream -->
+<div class="flex flex-col gap-lg">
+<!-- Post Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow transition-transform duration-200 card-hover overflow-hidden">
+<div class="p-md">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-md items-center">
+<img class="w-12 h-12 rounded-full border-2 border-surface object-cover" data-alt="A portrait of a creative designer with glasses and a beanie, standing in a studio with soft warm lighting. Casual, approachable, high-resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBshdNSXhwR6_qIPfW9jNlftHmC6znDx_V6IhJyczVl8HSReBj3qd0m_9aBIuCjowDJ3yRNymt9yN1HRYdoFpDiAaPQgrXCnwYIHl5JQIGGtzPJpjbPuJVeGEL_MFYbbwOFkL-L-lEjRz1LdSM_1smPv5BDD-6luL0WPOC8oh7hQMb6Htj1eWjgQPA_JmBguEyJFdN8gxMgg2aWkQxIVhxWrxn4hgRxqY2EZScm4BOMVDW-J7ty40o"/>
+<div>
+<h3 class="font-label-sm text-label-sm font-bold text-on-surface">Alex Rivera</h3>
+<p class="text-label-xs font-label-xs text-on-surface-variant">@arivera • 2h ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-md">
+                            Just finished the new branding concepts for the Q3 launch. The team really pushed the boundaries on this one. What do you all think of the softer color palette? ✨
+                        </p>
+</div>
+<img class="w-full h-auto max-h-[400px] object-cover border-y border-outline-variant" data-alt="A beautifully styled flat lay of branding materials spread across a light oak desk. Features sleek business cards with soft pastel gradients, a premium notebook, and modern typographic posters. Soft natural light streaming from a window, bright and airy modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVnws2kdHBP1M1cmnYaQ9hVfV14es7uouIq8W-FVhX-rfs8582ftwYtfu6wBsd63FDa4CvUIF9I6Ky6ivotrCJAEWU4R7d-RVd7mEUKXzY5FhUTqLzL24LUiaEBZ0NLryZWzyYMl8Sowp_5wpUsoxL2telpORs5uq5Ihhce_9yfljkUICENVoPBbQ8DMvCNkMrqmLou86XssPEZr9PNG7YpESft5QNMCneJ_J7ElWvRtVPd9wpMM8"/>
+<div class="p-md bg-surface-bright flex justify-between items-center text-on-surface-variant">
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">favorite</span> <span class="text-label-sm">245</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">chat_bubble</span> <span class="text-label-sm">42</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">repeat</span> <span class="text-label-sm">12</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group ml-auto">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</article>
+<!-- Post Card 2 (Text Only) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow transition-transform duration-200 card-hover overflow-hidden">
+<div class="p-md">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-md items-center">
+<img class="w-12 h-12 rounded-full border-2 border-surface object-cover" data-alt="A professional headshot of an Asian male executive in a sharp navy suit, smiling confidently against a minimal grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD49og6Q0ZyW3DDAPLSlwbM6CEMMy9SXOODghTgaFV58sp4MnShyYTELs9mVp775QLfvYo7oOyOOVQLXpgE6jzaszRZLsRxIOXhhg1Mnq749oVKVgS824s5t9XS7avX_gGu3NKVJeio597p0TzXVkHBk07R6k3nxFIeMNm-nnYBgnCreJMwKr8jLsK4X4SYEmTPsl7_iG8kU75wig7FxJXEPhmNosWkJnwYDcLlakiUtyT7BVBBCp0"/>
+<div>
+<h3 class="font-label-sm text-label-sm font-bold text-on-surface">David Chen</h3>
+<p class="text-label-xs font-label-xs text-on-surface-variant">@dchen_tech • 4h ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-md">
+                            Reminder: Complexity is easy, simplicity is hard. Always strive for the latter in your architecture and your UI. It pays dividends long term.
+                        </p>
+</div>
+<div class="p-md border-t border-outline-variant bg-surface-bright flex justify-between items-center text-on-surface-variant">
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">favorite</span> <span class="text-label-sm">1.2k</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">chat_bubble</span> <span class="text-label-sm">89</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined group-hover:fill-current">repeat</span> <span class="text-label-sm">340</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex items-center gap-xs hover:text-primary transition-colors group ml-auto">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Right Sidebar (Trending/Suggestions) - Hidden on smaller screens -->
+<aside class="hidden xl:block w-80 py-lg pr-margin-desktop pl-lg shrink-0">
+<div class="sticky top-lg flex flex-col gap-lg">
+<!-- Trending Box -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mb-md">Trending for you</h2>
+<ul class="flex flex-col gap-md">
+<li>
+<p class="text-label-xs text-on-surface-variant mb-1">Technology • Trending</p>
+<a class="font-label-sm font-bold text-on-surface hover:text-primary" href="#">#DesignSystems</a>
+<p class="text-label-xs text-on-surface-variant mt-1">12.5K posts</p>
+</li>
+<li>
+<p class="text-label-xs text-on-surface-variant mb-1">Business • Trending</p>
+<a class="font-label-sm font-bold text-on-surface hover:text-primary" href="#">#Q3Earnings</a>
+<p class="text-label-xs text-on-surface-variant mt-1">8,201 posts</p>
+</li>
+<li>
+<p class="text-label-xs text-on-surface-variant mb-1">Productivity • Trending</p>
+<a class="font-label-sm font-bold text-on-surface hover:text-primary" href="#">Deep Work</a>
+<p class="text-label-xs text-on-surface-variant mt-1">5,432 posts</p>
+</li>
+</ul>
+<a class="text-primary font-label-sm mt-md inline-block hover:underline" href="#">Show more</a>
+</div>
+<!-- Who to follow Box -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mb-md">Who to follow</h2>
+<ul class="flex flex-col gap-md">
+<li class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<img class="w-10 h-10 rounded-full border border-surface" data-alt="A portrait of a vibrant young tech influencer with colorful hair, wearing a sleek black turtleneck. Modern studio lighting, energetic vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABXV34Pmczv3UUJCDJdCdvAHZN4JC8ZlmkU8GHpnmuz1896y85iki48SukJ47620FtUN4rlagols5mzIhBVkvXjuMr8Lxy3oS0FL39q1NVRzIKQr8vVzeBIp9qq8xU6Mz9b8edLjzvac4Usc52z5JHiuhWs36o9QE4f_F8r7yR4yDME1gmBKrIXLM-MQ3S8juAtrNC_jil01fwVFXHOa3DlmYdlUOxedyNvH3L0o5BT-DCEryN6OY"/>
+<div>
+<h4 class="font-label-sm font-bold text-on-surface">Sam Taylor</h4>
+<p class="text-label-xs text-on-surface-variant">@samt_dev</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-label-sm font-bold hover:bg-primary hover:text-on-primary transition-colors">Follow</button>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<img class="w-10 h-10 rounded-full border border-surface" data-alt="A close up photo of a majestic golden retriever dog looking attentively at the camera in a sunny park setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6rz2ZC6mBEjaKCO1_ZOOSYfjTLaNg0mLDzxlxP202fyMzl-_0fZYe9dm2TKmoLHo6B3WuJPLwFH7L6dpEiA3e8IF09zhYKBP-VikmXrKGgOmsPuFJSy4BIhS5LKR-uwlKpJMIZlgW2RvYxWCkCZzsWVejtXrHrLEqb3kmF6lQpvQf7IZ8MEvMnm-7a59chdQ1CfoQVZjfPpveFTEl6Q_72KgBqwaz4XCfSeh1L3hFPmjFD6bqPmg"/>
+<div>
+<h4 class="font-label-sm font-bold text-on-surface">Tech News Daily</h4>
+<p class="text-label-xs text-on-surface-variant">@tech_update</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-label-sm font-bold hover:bg-primary hover:text-on-primary transition-colors">Follow</button>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-sm bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg text-primary dark:text-primary-fixed border-t border-outline-variant dark:border-outline shadow-lg rounded-t-xl font-label-xs text-label-xs">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">notifications</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</nav>
+</body></html>
