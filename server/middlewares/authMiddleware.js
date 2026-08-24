@@ -2,6 +2,7 @@ import { verifyAccessToken } from "../utils/jwt.js";
 
 export const protect = (req, res, next) => {
     const authHeader = req.headers.authorization || req.headers.Authorization || "";
+    // console.log(authHeader);
     const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
 
     if (!token) {
@@ -11,6 +12,7 @@ export const protect = (req, res, next) => {
     try {
         const decoded = verifyAccessToken(token);
 
+        console.log(decoded);
         // TODO: load user from DB and attach safe user object
         req.user = decoded;
 
