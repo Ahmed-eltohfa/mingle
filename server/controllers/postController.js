@@ -24,10 +24,24 @@ export const createPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   try {
-    const postslist = await Post.find({ isDeleted: false }).sort({
-      createdAt: -1,
-    });
-    return successResponse(res, postslist, 200);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    const postList = await Post.find({ isDeleted: false })
+      .sort({
+        createdAt: -1,
+      })
+      .skip(skip)
+      .limit(limit);
+    if (!postList.length) {
+      return successResponse(res, { message: "No posts found", data: [] }, 200);
+    }
+
+    return successResponse(
+      res,
+      { data: postList, page, limit, count: postList.length },
+      200,
+    );
   } catch (err) {
     return errorResponse(res, "failed to fetch data", 500, err.message);
   }
