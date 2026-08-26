@@ -1,9 +1,12 @@
+@if (isLoading()) {
+<div class="loading">Loading profile...</div>
+} @else if (user(); as currentUser) {
 <section class="profile-page mingle-card">
     <header class="profile-header">
         <div class="cover"></div>
 
         <div class="identity-row">
-            <img class="avatar" src="https://picsum.photos/seed/mingle-avatar/220/220" alt="Alex Mercer avatar" />
+            <img class="avatar" [src]="getAvatarUrl(currentUser)" [alt]="currentUser.name + ' avatar'" />
 
             <div class="header-actions">
                 <button type="button" class="ghost-button icon-only" aria-label="Share profile">
@@ -14,12 +17,12 @@
         </div>
 
         <div class="profile-info">
-            <h1>Alex Mercer</h1>
-            <p class="handle">@alexmercer</p>
-            <p class="bio">Digital Explorer | Design Enthusiast. Exploring the intersection of art and tech.</p>
+            <h1>{{ currentUser.name }}</h1>
+            <p class="handle">&#64;{{ currentUser.username }}</p>
+            <p class="bio">{{ currentUser.bio || 'No bio provided yet.' }}</p>
             <p class="stats">
-                <span><strong>1,240</strong> Following</span>
-                <span><strong>45.2K</strong> Followers</span>
+                <span><strong>0</strong> Following</span>
+                <span><strong>0</strong> Followers</span>
             </p>
         </div>
 
@@ -38,3 +41,4 @@
         }
     </div>
 </section>
+}
