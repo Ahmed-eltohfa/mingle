@@ -67,8 +67,8 @@ export const routes: Routes = [
 					rail: 'home',
 				},
 				loadComponent: () =>
-					import('./features/static/pages/coming-soon-page.component').then(
-						(m) => m.ComingSoonPageComponent,
+					import('./features/post/pages/create-post.component').then(
+						(m) => m.CreatePostComponent,
 					),
 			},
 			{
