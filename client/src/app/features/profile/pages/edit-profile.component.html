@@ -1,0 +1,29 @@
+<section class="edit-profile-card mingle-card">
+    <h2>Edit Profile</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="avatar-upload">
+            <img [src]="avatarPreview() || 'https://picsum.photos/seed/default/120/120'" alt="Avatar preview"
+                class="avatar-preview" />
+            <label for="avatarInput" class="ghost-button">Change Photo</label>
+            <input id="avatarInput" type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" rows="4" formControlName="bio" placeholder="Tell us about yourself..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="ghost-button" routerLink="/profile">Cancel</button>
+            <button type="submit" class="submit-button" [disabled]="profileForm.invalid || isSubmitting()">
+                {{ isSubmitting() ? 'Saving...' : 'Save Changes' }}
+            </button>
+        </div>
+    </form>
+</section>

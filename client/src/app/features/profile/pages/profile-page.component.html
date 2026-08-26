@@ -9,10 +9,8 @@
             <img class="avatar" [src]="getAvatarUrl(currentUser)" [alt]="currentUser.name + ' avatar'" />
 
             <div class="header-actions">
-                <button type="button" class="ghost-button icon-only" aria-label="Share profile">
-                    <span class="material-symbols-outlined">share</span>
-                </button>
-                <button type="button" class="ghost-button">Edit Profile</button>
+                <span class="material-symbols-outlined">share</span>
+                <button type="button" class="ghost-button" routerLink="/edit-profile">Edit Profile</button>
             </div>
         </div>
 

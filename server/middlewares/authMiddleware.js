@@ -2,7 +2,7 @@ import { verifyAccessToken } from "../utils/jwt.js";
 
 export const protect = (req, res, next) => {
     const authHeader = req.headers.authorization || req.headers.Authorization || "";
-    console.log(authHeader);
+    // console.log(authHeader);
     const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
 
     if (!token) {
@@ -12,7 +12,7 @@ export const protect = (req, res, next) => {
     try {
         const decoded = verifyAccessToken(token);
 
-        console.log(decoded);
+        // console.log(decoded);
         // TODO: load user from DB and attach safe user object
         req.user = decoded;
 
@@ -34,18 +34,34 @@ export const isAdmin = (req, res, next) => {
     return next();
 };
 
-export const isOwnerOrAdmin = (ownerIdPathParam = "userId") => {
+export const isOwnerOrAdmin = (ownerIdParam = "id") => {
     return (req, res, next) => {
+        // 1. Ensure `protect` middleware ran before this
         if (!req.user) {
-            return res.status(401).json({ message: "Unauthorized" });
+            return res.status(401).json({ message: "Unauthorized: Authentication required" });
         }
 
-        const ownerId = req.params[ownerIdPathParam];
+        // 2. Get target resource ID from URL params (e.g., req.params.id)
+        const resourceOwnerId = req.params[ownerIdParam];
 
-        if (req.user.role === "admin" || String(req.user.id) === String(ownerId)) {
+        if (!resourceOwnerId) {
+            return res.status(400).json({
+                message: `Bad Request: Route parameter '${ownerIdParam}' was not provided`
+            });
+        }
+
+        // 3. Normalize current user ID (handles Mongoose ObjectId vs String)
+        const currentUserId = req.user._id ? req.user._id.toString() : req.user.id;
+
+        const isAdmin = req.user.role === "admin";
+        const isOwner = currentUserId === resourceOwnerId.toString();
+
+        // 4. Grant access if Admin or Owner
+        if (isAdmin || isOwner) {
             return next();
         }
 
-        return res.status(403).json({ message: "Forbidden" });
+        // 5. Block access if neither
+        return res.status(403).json({ message: "Forbidden: You do not have permission" });
     };
 };

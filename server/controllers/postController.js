@@ -32,7 +32,7 @@ export const getPosts = async (req, res) => {
                 createdAt: -1,
             })
             .skip(skip)
-            .limit(limit);
+            .limit(limit).populate("author", "username avatar");
         if (!postList.length) {
             return successResponse(res, { message: "No posts found", data: [] }, 200);
         }
@@ -50,7 +50,7 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
         const { postId } = req.params;
-        const aPost = await Post.find({ _id: postId, isDeleted: false });
+        const aPost = await Post.find({ _id: postId, isDeleted: false }).populate("author", "username avatar");;
         if (!aPost || aPost.length === 0) {
             return errorResponse(res, "Post not found or was deleted", 404);
         }

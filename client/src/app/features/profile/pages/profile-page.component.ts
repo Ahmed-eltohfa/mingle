@@ -1,12 +1,13 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
-import { UserService } from '../services/user.service'; // Adjust relative path
-import { User } from '../models/user.model'; // Adjust relative path
-
+import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
+  imports: [RouterLink], 
 })
 export class ProfilePageComponent implements OnInit {
   private readonly userService = inject(UserService);

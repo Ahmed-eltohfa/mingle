@@ -44,6 +44,15 @@ export const routes: Routes = [
 					),
 			},
 			{
+				path: 'edit-profile',
+				title: 'Edit Profile | Mingle',
+				data: { rail: 'profile' },
+				loadComponent: () =>
+					import('./features/profile/pages/edit-profile.component').then(
+						(m) => m.EditProfileComponent,
+					),
+			},
+			{
 				path: 'explore',
 				title: 'Explore | Mingle',
 				data: {
