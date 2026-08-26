@@ -35,9 +35,11 @@ export interface AuthSession {
 }
 
 export interface AuthResponse {
-  user: AuthUser;
-  session: AuthSession;
-  message?: string;
+  success: boolean;
+  message: string;
+  data: {
+    token: string;
+  };
 }
 
 export interface ApiMessageResponse {
