@@ -6,8 +6,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const platformId = inject(PLATFORM_ID);
 
   let token: string | null = null;
-
-  // Safe check for SSR: only access localStorage in the browser
+  
   if (isPlatformBrowser(platformId)) {
     token = localStorage.getItem('token');
   }

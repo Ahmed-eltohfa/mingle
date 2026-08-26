@@ -73,6 +73,9 @@
                     <span class="material-symbols-outlined">bookmark</span>
                 </button>
             </footer>
+
+            <app-comment [postId]="post._id"></app-comment>
+            
         </article>
         } @empty {
         <p class="no-posts">No posts found yet.</p>
