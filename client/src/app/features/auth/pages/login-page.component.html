@@ -1,0 +1,60 @@
+<section class="login-page">
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="orb orb-left" aria-hidden="true"></div>
+    <div class="orb orb-right" aria-hidden="true"></div>
+
+    <main class="mingle-card login-card">
+        <header>
+            <h1>Mingle</h1>
+            <h2>Welcome back</h2>
+            <p>Enter your details to access your account.</p>
+        </header>
+
+        <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+            <label for="email">Email address</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">mail</span>
+                <input id="email" class="mingle-focus" formControlName="email" type="email"
+                    placeholder="name@example.com" autocomplete="email" />
+            </div>
+            @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+            <small class="error-message">Enter a valid email address.</small>
+            }
+
+            <label for="password">Password</label>
+            <div class="field-wrap">
+                <span class="material-symbols-outlined icon">lock</span>
+                <input id="password" class="mingle-focus" formControlName="password"
+                    [type]="isPasswordVisible() ? 'text' : 'password'" placeholder="••••••••"
+                    autocomplete="current-password" />
+                <button type="button" class="visibility" (click)="togglePasswordVisibility()"
+                    aria-label="Toggle password visibility">
+                    <span class="material-symbols-outlined">
+                        {{ isPasswordVisible() ? 'visibility_off' : 'visibility' }}
+                    </span>
+                </button>
+            </div>
+            @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+            <small class="error-message">Password must be at least 6 characters.</small>
+            }
+
+            <div class="row-options">
+                <label class="remember">
+                    <input type="checkbox" formControlName="rememberMe" />
+                    Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button class="mingle-button-primary submit" type="submit">
+                Login
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </form>
+
+        <p class="footer-copy">
+            Don't have an account?
+            <a routerLink="/signup">Create an account</a>
+        </p>
+    </main>
+</section>

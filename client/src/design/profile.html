@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Mingle - Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface": "#0b1c30",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary": "#4648d4",
+                        "surface-container": "#e5eeff",
+                        "tertiary-container": "#b55d00",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-fixed-dim": "#89ceff",
+                        "primary-fixed": "#e1e0ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-background": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-container": "#004666",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "primary-container": "#6063ee",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#006591",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#39b8fd",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-primary-container": "#fffbff",
+                        "on-surface-variant": "#464554",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-primary": "#c0c1ff",
+                        "on-secondary-fixed": "#001e2f",
+                        "tertiary": "#904900",
+                        "on-tertiary-fixed": "#301400",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "inverse-surface": "#213145",
+                        "surface-variant": "#d3e4fe",
+                        "outline": "#767586",
+                        "on-primary-fixed": "#07006c",
+                        "surface-dim": "#cbdbf5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-xs": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-xs": ["12px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+    <!-- TopNavBar (Mobile Only) -->
+    <header
+        class="md:hidden sticky top-0 z-50 flex justify-between items-center px-margin-mobile w-full h-16 bg-surface/80 backdrop-blur-md text-primary font-body-md shadow-sm border-b border-outline-variant">
+        <div class="flex items-center gap-2">
+            <span class="font-display-lg-mobile text-display-lg-mobile font-bold text-primary">Mingle</span>
+        </div>
+        <div class="flex gap-4">
+            <button
+                class="hover:bg-surface-container-low active:scale-95 duration-200 p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-primary">add_circle</span>
+            </button>
+            <button
+                class="hover:bg-surface-container-low active:scale-95 duration-200 p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+            </button>
+            <button
+                class="hover:bg-surface-container-low active:scale-95 duration-200 p-2 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-primary">mail</span>
+            </button>
+        </div>
+    </header>
+    <!-- SideNavBar (Desktop Only) -->
+    <aside
+        class="hidden lg:flex flex-col fixed left-0 top-0 h-full p-md gap-sm bg-surface text-primary font-label-sm w-64 border-r border-outline-variant">
+        <div class="mb-lg px-md py-sm">
+            <h1 class="font-display-lg text-display-lg font-black text-primary">Mingle</h1>
+            <p class="text-on-surface-variant font-label-sm mt-xs">Social Network</p>
+        </div>
+        <nav class="flex-1 flex flex-col gap-xs">
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">explore</span>
+                Explore
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">add_box</span>
+                Create
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">notifications</span>
+                Notifications
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">mail</span>
+                Messages
+            </a>
+            <!-- Active State -->
+            <a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-xl px-md py-sm font-bold hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined fill-icon">person</span>
+                Profile
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">bookmark</span>
+                Saved
+            </a>
+            <a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-high rounded-xl transition-all hover:translate-x-1 duration-200"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+        </nav>
+        <button
+            class="bg-primary text-on-primary rounded-full py-3 px-4 font-bold mt-auto hover:brightness-110 transition-all shadow-md active:scale-95">
+            Create Post
+        </button>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 lg:ml-64 flex flex-col md:flex-row overflow-y-auto w-full">
+        <!-- Center Profile Feed -->
+        <div class="flex-1 max-w-4xl mx-auto w-full min-h-screen">
+            <!-- Profile Header -->
+            <div class="relative bg-surface border-b border-outline-variant pb-md">
+                <!-- Cover Image -->
+                <div class="h-48 md:h-64 w-full bg-surface-container-highest relative overflow-hidden"
+                    data-alt="A vibrant digital illustration of a futuristic city skyline at dusk, bathed in warm sunset colors and neon purple lights. Soft, fluid shapes give a welcoming modern corporate vibe. Minimalist yet dynamic."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoz3v0UAxy5EA5d4igzlnDKE6CgUbSQv4zakHhYLx7QcCmXnnjDngoAt6qIN82coYudibdRUXEcj8vCpmq4xw64BLWq7vWLL9cYIj5P4uO_VViBRcf908AohQvmr7_Psnhw16ywXet-vlWqf_tQf3hVRhgX1RteNPo58RHseXaeOKWRLhj-DNwuG3by_NXHtwn8oyioTsDAp_NlwAh3hloN_DAYo89bdGvfeMdjBJXpFKEDUC5s6w')">
+                </div>
+                <!-- Avatar & Actions -->
+                <div class="px-margin-mobile md:px-margin-desktop flex justify-between items-start relative">
+                    <div class="-mt-16 md:-mt-20 relative">
+                        <img alt="User Profile"
+                            class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-surface object-cover shadow-sm bg-surface-container"
+                            data-alt="A high-quality portrait photo of a cheerful young professional looking directly at the camera, wearing a neat casual outfit against a clean, light blue background. Soft, flattering studio lighting."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2nJNBPUlcK9X0lyQcc9w1Gvqwe1WJ_pe1CkiChPqCZGooFLdXhdk-6fXWJGSfVh8EJMTwuwfBhukawv7AORFMbatIfZ-CmJGU-5hZGfcAdx9OEpbrPhDm24N4hL-dXSDbODXs0r5X_U7wVwEAsnVJ7FGSJ-x8VoTEAYveW2SBuQALdvf8STmY-Nr2AXndD0GM2VNZIfsf8aUnsyQOOkXs3mOgG89joquhWAzBrYEAg6rutjdLCeo" />
+                    </div>
+                    <div class="mt-4 flex gap-sm">
+                        <button
+                            class="p-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined">share</span>
+                        </button>
+                        <button
+                            class="px-6 py-2 rounded-full border border-outline-variant text-on-surface font-label-sm font-bold hover:bg-surface-container-low transition-colors">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+                <!-- Profile Info -->
+                <div class="px-margin-mobile md:px-margin-desktop mt-4">
+                    <h2 class="font-headline-md text-headline-md text-on-surface">Alex Mercer</h2>
+                    <p class="text-on-surface-variant font-body-md">@alexmercer</p>
+                    <p class="mt-4 font-body-md text-on-surface">Digital Explorer | Design Enthusiast 🎨✨ Exploring the
+                        intersection of art and tech.</p>
+                    <div class="flex gap-lg mt-4 font-body-md">
+                        <span class="text-on-surface-variant"><strong class="text-on-surface font-bold">1,240</strong>
+                            Following</span>
+                        <span class="text-on-surface-variant"><strong class="text-on-surface font-bold">45.2K</strong>
+                            Followers</span>
+                    </div>
+                </div>
+                <!-- Tabs -->
+                <div class="flex mt-lg px-margin-mobile md:px-margin-desktop gap-lg border-b border-outline-variant">
+                    <button class="pb-3 border-b-2 border-primary text-primary font-bold font-label-sm">Posts</button>
+                    <button
+                        class="pb-3 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-sm transition-colors">Media</button>
+                    <button
+                        class="pb-3 border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-sm transition-colors">Saved</button>
+                </div>
+            </div>
+            <!-- Content Grid (Posts Tab) -->
+            <div class="p-margin-mobile md:p-margin-desktop">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-sm md:gap-md">
+                    <!-- Grid Item 1 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="A clean, minimalist workspace setup featuring a modern laptop, a sleek cup of coffee, and a small potted succulent on a white desk. Bright natural light creates soft shadows. Professional and inspiring vibe."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIrgcrMYQxf5Fb76uaEMfTg5Aa28nJ2kgf1kKWOVa8QyJbc7bBAa8GnpVxtGtidoQcpkUWLePFwnMAwUp5ERb82XjmhPFMfxU6VZ3tR1Ui1DLepk8Vj5zB75zpaqloXOllX5Eo2jTn89Ek_jOX5Ysp-3W17PzHc88eEx8lgIT_LYoZJ3nLrgQpsr_WvHBZr_dzzh_hlyUXolshRr08YgDevxdq6EOSqI5qzvWLq9WAySoMQ6_OpI0')">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
+                            <span class="flex items-center gap-1"><span
+                                    class="material-symbols-outlined fill-icon">favorite</span> 1.2k</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="material-symbols-outlined fill-icon">chat_bubble</span> 48</span>
+                        </div>
+                    </div>
+                    <!-- Grid Item 2 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="Abstract fluid art featuring gentle ripples of Mingle Indigo and soft peach colors blending together seamlessly. The texture looks like liquid glass. Bright, modern, and soothing aesthetic."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo2cTIMY4HsGDZmFnrDQGCRZR-O4GYJqN1YJ8FuDwIPZoHZ8FgM-fnLaaxvePASshfzAd5NFbkl5Mnwr2CJg9OrnWVnzCXnAANHy38gkI4pl4WiHaU6gPJVFkUUErtrKTq8qzTByluaCc7E_MClt-K5mimLotJneH4lOLb2do4uv66GxygFoKRwqG0QUwvBYICeQyTgakNdE7c8zdegVnji9b7IcH-aDdZW5Aq4GG1OwwMfpXDuQY')">
+                        </div>
+                    </div>
+                    <!-- Grid Item 3 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="A beautifully plated artisanal pastry on a minimalist matte ceramic plate, placed on a light wooden table. Soft morning sunlight illuminates the scene, highlighting the textures. Warm and inviting."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAi-P8UzyKEMMuPPdpKvqxfKmsO45pElOps7XM9RZEoezUj_6FpfEXIPJAzGvJn0fWkYwmsDmp1bie5bqQ4ihQaHuHo0UXjdiylNhDGZO2YikogxrVGRYz3uePzThxLuXBZlGqMVdj4Pv1gTjy7dBfvtO-8FD0Kok75zkGxyU_mc3s7IxXJGcfjmDrdsrIKrkBYxz4iuNmei4Yx6ycqn8LnfgBis1mNCzLLQt2c4bfmcm_q-voCMtQ')">
+                        </div>
+                    </div>
+                    <!-- Grid Item 4 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="A sleek, modern bicycle parked against a pristine white brick wall. Subtle shadows and minimal composition give it an elegant, high-end lifestyle feel."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBchSFCHIReD8rQ_N822WCNWhcFL8HVYrUlWdicBEPRhKdGd7v2AKcfI3oYE9Z_5zkILYYmnKBINBpMerda5wAGorn5MEPVYuLognzntZNrMMEdgSiWxAtrNPlHq-VRBb36icIMj105cL5ceh_lQXqAX6ruj5uJCSVjBelOEXKwKvPs7TGuEmUWQAZnFcSUAhFkQEwxJy6kAoaH-h0SxQ73hWYXfD5aZh0TDyaT-ROb-DXOnGDHFBU')">
+                        </div>
+                    </div>
+                    <!-- Grid Item 5 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="Close-up of a designer notebook with elegant typography on the cover, resting on a clean desk beside a premium metallic pen. Professional, organized, and creative atmosphere."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDutZwY5kv1YEH4X4au7wuA4rw10rWNpePCf_JIR17daklg4q1cr1qDNpfasA4_vHGVnvUqOoSffIbT5-dGwhCwweZffkDuHfLF_SSAGKlyhk0ZRXmYFwiRHhvoUT5eaddbWy00Oz9s3Afa-sA-t86eREfCdldNXMRzJZMtgC-IJBz5DlMm4dm2fSmm3WYS8Jiq1vpO-Lo6XN9jK1HuDn8zzrNYqRDGG-YLbtmevqQZdkKbekX5uMY')">
+                        </div>
+                    </div>
+                    <!-- Grid Item 6 -->
+                    <div
+                        class="aspect-square rounded-lg overflow-hidden bg-surface-container-low shadow-sm border border-outline-variant/50 relative group cursor-pointer">
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            data-alt="A tranquil outdoor scene showing calm water reflecting a clear blue sky, framed by soft, out-of-focus green leaves in the foreground. Peaceful, nature-inspired, and serene."
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCameCpra6VdU_gPvlH5OUPaP8_PCyoa5hKRM3H2o8-OEkDVMkIHCJRCu_I5tiVdRVUhMrlTWi15KbVgkDPoYOqQxRzSVLnZbBSLXTwfCtqHCvNRCIc15JiJVlf1p8LTXdWKZ5NZfeD3evAqmD7bnnQV2k0icbIgiUbNfblbBf1NGV1J_OlPdJggAY_6dFu_J04bFJnf3aMpHSgYVbJL3Ae0EJBKbiWUMqgYLOrvPEjWEkefjLES0')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-24 md:h-0"></div> <!-- Spacer for mobile bottom nav -->
+        </div>
+        <!-- Right Sidebar (Suggested Friends) - Hidden on smaller screens -->
+        <aside class="hidden xl:block w-80 p-margin-desktop border-l border-outline-variant bg-surface overflow-y-auto">
+            <h3 class="font-headline-md text-headline-md mb-lg">Suggested for you</h3>
+            <div class="flex flex-col gap-md">
+                <!-- Suggestion 1 -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img class="w-10 h-10 rounded-full object-cover bg-surface-container-highest"
+                            data-alt="Small circular avatar showing a smiling woman with glasses, soft pastel background."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJVeaJ-b395EzKAY-9L3DKe53hDwhJ73G9S3lR4xS7tFacf7uHb0WiDtws0e-XvPUpLWH5BxCcNLEOAHtYOleRuSb3BC6_Q3dgI35p68bS1aEEfXcVs0eHcIVeAY0yjUFBQpuF_3VijfdTNw46j4nYj21ceMQ5pRnth42e0n198CmIx-x-g6yNLDpkV3vgyPsI497LFiipUcOr3lju3pL5YP4WytNdLW4nznZu7Od8oG6-750D0bE" />
+                        <div>
+                            <p class="font-label-sm font-bold text-on-surface leading-tight">Sarah Jenkins</p>
+                            <p class="text-label-xs text-on-surface-variant">Followed by John Doe</p>
+                        </div>
+                    </div>
+                    <button
+                        class="text-primary font-label-sm font-bold hover:text-primary-container transition-colors">Follow</button>
+                </div>
+                <!-- Suggestion 2 -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img class="w-10 h-10 rounded-full object-cover bg-surface-container-highest"
+                            data-alt="Small circular avatar showing a young man in a sunny outdoor setting."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh9z4lgcECW5-bAilyGl-BcsSl2-izcHJO7pMqNL8ZWGpk-yDwdnNZBlluKs7OeBhfiHL583uHKZdXPB5lmfM1DldUwZw7Ep_vAwBWvCFNk_O_XjlLO5uu_cHx78meP1hmhiuEQJoNYKv4-S7LR8lcWrkT_MJPUU7l_zBeuX7HGgXSeTPXA9QzwIiBGhQzgaKY_GNBhimqqvoLvHr3m5D6Z8BP7MJ7eOCvUc3QOUKfrQqrVvq6HAs" />
+                        <div>
+                            <p class="font-label-sm font-bold text-on-surface leading-tight">Marcus Lin</p>
+                            <p class="text-label-xs text-on-surface-variant">New to Mingle</p>
+                        </div>
+                    </div>
+                    <button
+                        class="text-primary font-label-sm font-bold hover:text-primary-container transition-colors">Follow</button>
+                </div>
+                <!-- Suggestion 3 -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img class="w-10 h-10 rounded-full object-cover bg-surface-container-highest"
+                            data-alt="Small circular avatar showing a graphic designer's geometric logo design."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3x6JvZPcVQwvWOsALejg2KxYY2Taaqb0mqNT7f3V_461MvH29SHoH06QNi_JhH6sx0fiDHIjevJT4XjhaE6lN9frNZ1LtnY04kqCpnJ70_W6oXfUUgakOwAfoJ-0p_6bByDeFNrhmtUU40Xa9sBaXlbGxaWzXvKONjfEeafVmoWa1qbaT1SHNIT4iSWp6YHI6AmlKlMmT4Iu0Vu9ptctlKtO1GyvvgtEMxo-t-zpjaZZ2_D4JQ84" />
+                        <div>
+                            <p class="font-label-sm font-bold text-on-surface leading-tight">Design Hub</p>
+                            <p class="text-label-xs text-on-surface-variant">Suggested for you</p>
+                        </div>
+                    </div>
+                    <button
+                        class="text-primary font-label-sm font-bold hover:text-primary-container transition-colors">Follow</button>
+                </div>
+            </div>
+            <footer
+                class="mt-xl pt-lg border-t border-outline-variant/50 text-label-xs text-on-surface-variant flex flex-wrap gap-2">
+                <a class="hover:underline" href="#">About</a>
+                <a class="hover:underline" href="#">Help</a>
+                <a class="hover:underline" href="#">Privacy</a>
+                <a class="hover:underline" href="#">Terms</a>
+                <span class="w-full mt-2">© 2024 Mingle</span>
+            </footer>
+        </aside>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-sm bg-surface/90 backdrop-blur-lg border-t border-outline-variant shadow-lg rounded-t-xl text-primary font-label-xs">
+        <a class="flex flex-col items-center justify-center text-on-surface-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150 rounded-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1">home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150 rounded-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1">search</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150 rounded-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1">add_circle</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant w-12 h-12 active:bg-surface-container-highest active:scale-90 duration-150 rounded-full"
+            href="#">
+            <span class="material-symbols-outlined mb-1">notifications</span>
+        </a>
+        <!-- Active State -->
+        <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full w-12 h-12 active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined fill-icon">person</span>
+        </a>
+    </nav>
+</body>
+
+</html>

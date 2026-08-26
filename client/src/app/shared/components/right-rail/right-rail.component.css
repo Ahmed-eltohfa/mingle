@@ -1,0 +1,92 @@
+:host {
+    display: none;
+}
+
+.right-rail {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.rail-card {
+    padding: var(--space-3);
+}
+
+h2 {
+    margin: 0 0 var(--space-3);
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.meta {
+    margin: 0;
+    color: var(--on-surface-variant);
+    font-size: 12px;
+}
+
+.topic {
+    margin: 2px 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.rail-link {
+    margin-top: var(--space-3);
+    display: inline-block;
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.suggestion-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.who-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.who-left img {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    object-fit: cover;
+}
+
+.follow-button {
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--primary) 14%, white);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.rail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--on-surface-variant);
+    font-size: 12px;
+}
+
+@media (min-width: 1280px) {
+    :host {
+        display: block;
+    }
+}

@@ -1,0 +1,67 @@
+<div class="feed-page">
+    <section class="mingle-card compose-card">
+        <div class="compose-row">
+            <img src="https://picsum.photos/seed/mingle-me/80/80" alt="Your avatar" />
+            <textarea placeholder="What's on your mind?"></textarea>
+        </div>
+        <div class="compose-actions">
+            <div class="left-actions">
+                <button type="button" aria-label="Upload image">
+                    <span class="material-symbols-outlined">image</span>
+                </button>
+                <button type="button" aria-label="Upload video">
+                    <span class="material-symbols-outlined">videocam</span>
+                </button>
+                <span class="mingle-chip">
+                    <span class="material-symbols-outlined">public</span>
+                    Everyone
+                </span>
+            </div>
+            <button type="button" class="mingle-button-primary post-btn">Post</button>
+        </div>
+    </section>
+
+    <section class="feed-list" aria-label="Feed posts">
+        @for (post of posts; track post.author + post.time) {
+        <article class="mingle-card post-card">
+            <header class="post-header">
+                <div class="identity">
+                    <img [src]="post.avatar" [alt]="post.author + ' avatar'" loading="lazy" />
+                    <div>
+                        <h3>{{ post.author }}</h3>
+                        <p>{{ post.handle }} • {{ post.time }}</p>
+                    </div>
+                </div>
+
+                <button type="button" class="icon-button" aria-label="More options">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                </button>
+            </header>
+
+            <p class="post-content">{{ post.content }}</p>
+
+            @if (post.image) {
+            <img class="post-image" [src]="post.image" [alt]="post.author + ' post image'" loading="lazy" />
+            }
+
+            <footer class="post-actions">
+                <button type="button">
+                    <span class="material-symbols-outlined">favorite</span>
+                    {{ post.likes }}
+                </button>
+                <button type="button">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                    {{ post.comments }}
+                </button>
+                <button type="button">
+                    <span class="material-symbols-outlined">repeat</span>
+                    {{ post.reposts }}
+                </button>
+                <button type="button" class="bookmark" aria-label="Save post">
+                    <span class="material-symbols-outlined">bookmark</span>
+                </button>
+            </footer>
+        </article>
+        }
+    </section>
+</div>

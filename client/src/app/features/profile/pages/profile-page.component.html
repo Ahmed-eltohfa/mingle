@@ -1,0 +1,40 @@
+<section class="profile-page mingle-card">
+    <header class="profile-header">
+        <div class="cover"></div>
+
+        <div class="identity-row">
+            <img class="avatar" src="https://picsum.photos/seed/mingle-avatar/220/220" alt="Alex Mercer avatar" />
+
+            <div class="header-actions">
+                <button type="button" class="ghost-button icon-only" aria-label="Share profile">
+                    <span class="material-symbols-outlined">share</span>
+                </button>
+                <button type="button" class="ghost-button">Edit Profile</button>
+            </div>
+        </div>
+
+        <div class="profile-info">
+            <h1>Alex Mercer</h1>
+            <p class="handle">@alexmercer</p>
+            <p class="bio">Digital Explorer | Design Enthusiast. Exploring the intersection of art and tech.</p>
+            <p class="stats">
+                <span><strong>1,240</strong> Following</span>
+                <span><strong>45.2K</strong> Followers</span>
+            </p>
+        </div>
+
+        <nav class="tab-row" aria-label="Profile tabs">
+            <button type="button" class="is-active">Posts</button>
+            <button type="button">Media</button>
+            <button type="button">Saved</button>
+        </nav>
+    </header>
+
+    <div class="gallery-grid">
+        @for (image of gallery; track image) {
+        <article class="gallery-item">
+            <img [src]="image" alt="Profile media" loading="lazy" />
+        </article>
+        }
+    </div>
+</section>

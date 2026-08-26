@@ -1,0 +1,44 @@
+:host {
+    display: block;
+}
+
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    height: 68px;
+    padding: 8px 14px;
+    border-top: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
+    background: color-mix(in srgb, var(--surface) 87%, white);
+    backdrop-filter: blur(12px);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.bottom-item {
+    width: 42px;
+    height: 42px;
+    margin: auto;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: var(--on-surface-variant);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.bottom-item:active {
+    transform: scale(0.95);
+}
+
+.bottom-item.is-active {
+    color: var(--primary);
+    background: color-mix(in srgb, var(--secondary-container) 35%, white);
+}
+
+@media (min-width: 1024px) {
+    :host {
+        display: none;
+    }
+}

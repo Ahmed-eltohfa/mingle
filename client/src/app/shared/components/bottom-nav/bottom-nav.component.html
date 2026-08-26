@@ -1,0 +1,8 @@
+<nav class="bottom-nav" aria-label="Mobile navigation">
+    @for (item of items; track item.route) {
+    <a class="bottom-item" [routerLink]="item.route" routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }" [attr.aria-label]="item.label">
+        <span class="material-symbols-outlined">{{ item.icon }}</span>
+    </a>
+    }
+</nav>
