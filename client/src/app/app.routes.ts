@@ -67,8 +67,13 @@ export const routes: Routes = [
 					rail: 'home',
 				},
 				loadComponent: () =>
+<<<<<<< HEAD
 					import('./features/static/pages/coming-soon-page.component').then(
 						(m) => m.ComingSoonPageComponent,
+=======
+					import('./features/post/pages/create-post.component').then(
+						(m) => m.CreatePostComponent,
+>>>>>>> a007c7736639fa6883c05cea8f44c2edf2cfeda1
 					),
 			},
 			{
