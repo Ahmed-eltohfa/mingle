@@ -29,10 +29,10 @@
         <article class="mingle-card post-card">
             <header class="post-header">
                 <div class="identity">
-                    <img [src]="'https://picsum.photos/seed/' + post.author + '/80/80'" [alt]="post.author + ' avatar'"
+                    <img [src]="getAvatarUrl(post.author)" [alt]="(post.author?.username || 'User') + ' avatar'"
                         loading="lazy" />
                     <div>
-                        <h3>{{ post.author }}</h3>
+                        <h3>{{ post.author?.username || 'Anonymous' }}</h3>
                         <p>{{ post.createdAt | date:'shortTime' }}</p>
                     </div>
                 </div>

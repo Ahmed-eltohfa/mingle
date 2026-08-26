@@ -30,4 +30,17 @@ export class HomePageComponent implements OnInit {
       },
     });
   }
+  // Pass the populated author object from your post model
+  getAvatarUrl(author: { username?: string; avatar?: string } | null | undefined): string {
+    console.log('Author object:', author); // Debugging line to check the author object
+    if (author?.avatar) {
+      // Prepend server base URL if storing local upload paths like '/uploads/avatar.png'
+      return author.avatar.startsWith('http') 
+        ? author.avatar 
+        : `http://localhost:3000${author.avatar}`;
+    }
+
+    // Fallback seed using username or default string
+    return `https://picsum.photos/seed/${author?.username || 'mingle'}/80/80`;
+  }
 }
