@@ -26,6 +26,7 @@ export interface ApiResponse<T> {
 }
 
 export interface PaginatedPosts {
+  docs: never[];
   data: Post[];
   page: number;
   limit: number;

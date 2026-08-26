@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnDestroy, Output, signal, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs';
@@ -22,7 +23,7 @@ const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB, matches server-side multer lim
 })
 export class CreatePostComponent implements OnDestroy {
   private readonly postService = inject(PostService);
-
+  private readonly router = inject(Router);
   @Output() created = new EventEmitter<Post>();
 
   protected readonly isSubmitting = signal(false);
@@ -85,6 +86,8 @@ export class CreatePostComponent implements OnDestroy {
           this.postForm.reset({ content: '', visibility: 'public', altText: '' });
           this.clearSelectedFiles();
           this.created.emit(res.data);
+          // show success message then redirect to home page or clear form for new post
+          this.router.navigate(['/']);
         },
         error: (err: HttpErrorResponse) => {
           console.error('Failed to publish post:', err);
