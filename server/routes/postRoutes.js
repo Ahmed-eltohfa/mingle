@@ -33,7 +33,7 @@ router.delete("/:postId", protect, asyncHandler(deletePostById));
 
 router.post("/:postId/like", protect, asyncHandler(likePost))
 router.delete("/:postId/like", protect, asyncHandler(unlikePost))
-router.get("/postId/likes", protect, asyncHandler())
+router.get("/:postId/likes", protect, asyncHandler())
 
 router.post("/:postId/save", protect, asyncHandler(savePost))
 router.delete("/:postId/save", protect, asyncHandler(unsavePost))
