@@ -11,36 +11,61 @@
         </header>
 
         <form [formGroup]="signupForm" (ngSubmit)="submit()" novalidate>
-            <label for="fullName">Full name</label>
+            <!-- Full Name -->
+            <label for="fullName">Full name *</label>
             <div class="field-wrap">
                 <span class="material-symbols-outlined icon">person</span>
                 <input id="fullName" class="mingle-focus" formControlName="fullName" type="text"
                     placeholder="Alex Mercer" autocomplete="name" />
             </div>
+            @if (hasError('fullName', 'required')) {
+            <small class="error-message">Full name is required.</small>
+            } @else if (hasError('fullName', 'minlength')) {
+            <small class="error-message">Full name must be at least 2 characters.</small>
+            }
 
-            <label for="username">Username</label>
+            <!-- Username -->
+            <label for="username">Username *</label>
             <div class="field-wrap">
                 <span class="material-symbols-outlined icon">alternate_email</span>
                 <input id="username" class="mingle-focus" formControlName="username" type="text"
                     placeholder="alexmercer" autocomplete="username" />
             </div>
+            @if (hasError('username', 'required')) {
+            <small class="error-message">Username is required.</small>
+            } @else if (hasError('username', 'minlength')) {
+            <small class="error-message">Username must be at least 3 characters.</small>
+            }
 
-            <label for="email">Email address</label>
+            <!-- Email address -->
+            <label for="email">Email address *</label>
             <div class="field-wrap">
                 <span class="material-symbols-outlined icon">mail</span>
                 <input id="email" class="mingle-focus" formControlName="email" type="email"
                     placeholder="name@example.com" autocomplete="email" />
             </div>
+            @if (hasError('email', 'required')) {
+            <small class="error-message">Email address is required.</small>
+            } @else if (hasError('email', 'email')) {
+            <small class="error-message">Please enter a valid email address.</small>
+            }
 
-            <label for="password">Password</label>
+            <!-- Password -->
+            <label for="password">Password *</label>
             <div class="field-wrap">
                 <span class="material-symbols-outlined icon">lock</span>
                 <input id="password" class="mingle-focus" formControlName="password"
                     [type]="isPasswordVisible() ? 'text' : 'password'" placeholder="••••••••"
                     autocomplete="new-password" />
             </div>
+            @if (hasError('password', 'required')) {
+            <small class="error-message">Password is required.</small>
+            } @else if (hasError('password', 'minlength')) {
+            <small class="error-message">Password must be at least 6 characters.</small>
+            }
 
-            <label for="confirmPassword">Confirm password</label>
+            <!-- Confirm Password -->
+            <label for="confirmPassword">Confirm password *</label>
             <div class="field-wrap">
                 <span class="material-symbols-outlined icon">verified_user</span>
                 <input id="confirmPassword" class="mingle-focus" formControlName="confirmPassword"
@@ -53,14 +78,26 @@
                     </span>
                 </button>
             </div>
+            @if (hasError('confirmPassword', 'required')) {
+            <small class="error-message">Please confirm your password.</small>
+            } @else if (hasError('confirmPassword', 'minlength')) {
+            <small class="error-message">Confirm password must be at least 6 characters.</small>
+            }
 
+            <!-- Terms Checkbox -->
             <label class="terms">
                 <input type="checkbox" formControlName="acceptTerms" />
-                I agree to terms and privacy policy.
+                I agree to terms and privacy policy. *
             </label>
+            @if (hasError('acceptTerms', 'requiredTrue')) {
+            <small class="error-message">You must accept the terms to proceed.</small>
+            }
 
+            <!-- General API/Form Error -->
             @if (formError()) {
-            <small class="error-message">{{ formError() }}</small>
+            <div class="alert-error">
+                <small class="error-message">{{ formError() }}</small>
+            </div>
             }
 
             <button class="mingle-button-primary submit" type="submit" [disabled]="isSubmitting()">

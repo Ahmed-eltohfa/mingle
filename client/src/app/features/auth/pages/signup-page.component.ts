@@ -51,7 +51,19 @@ export class SignupPageComponent {
     this.isPasswordVisible.update((visible) => !visible);
   }
 
+  // Helper method for HTML validation checks
+  protected hasError(controlName: string, errorName: string): boolean {
+    const control = this.signupForm.get(controlName);
+    return !!(control && control.hasError(errorName) && (control.touched || control.dirty));
+  }
+
   protected submit(): void {
+    
+    console.log(`SUBMIT CLICKED`);
+    console.log('FORM VALID:', this.signupForm.valid);
+    console.log('FORM VALUE:', this.signupForm.getRawValue());
+    
+
     this.formError.set('');
 
     if (this.signupForm.invalid) {
@@ -81,12 +93,10 @@ export class SignupPageComponent {
         next: () => {
           void this.router.navigateByUrl('/login');
         },
-        error: (error: unknown) => {
-          this.formError.set(
-            error instanceof Error
-              ? error.message
-              : 'Failed to create account. Please try again.',
-          );
+        error: (error: any) => {
+          // Extracts backend express validation error if available
+          const apiMessage = error?.error?.message || error?.message || 'Failed to create account. Please try again.';
+          this.formError.set(apiMessage);
         },
       });
   }

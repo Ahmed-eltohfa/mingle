@@ -16,6 +16,10 @@ export class AuthApiService {
     data
   );
 }
+
+logout() {
+  localStorage.removeItem('token');
+}
   signUp(data: any) {
     return this.http.post<any>(
       `${this.apiUrl}/register`,
