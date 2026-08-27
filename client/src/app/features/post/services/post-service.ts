@@ -5,6 +5,7 @@ import {
   ApiResponse,
   CreatePostPayload,
   LikeResponse,
+  SaveResponse,
   PaginatedPosts,
   Post,
   UpdatePostPayload,
@@ -79,6 +80,25 @@ export class PostService {
   unlikePost(postId: string): Observable<ApiResponse<LikeResponse>>{
     return this.http.delete<ApiResponse<any>>(
       `${this.baseUrl}/${postId}/like`
+    )
+  }
+
+
+  savePost(postId: string): Observable<ApiResponse<SaveResponse>>{
+    return this.http.post<ApiResponse<SaveResponse>>(
+      `${this.baseUrl}/${postId}/save`, {}
+    )
+  }
+
+  unsavePost(postId: string): Observable<ApiResponse<SaveResponse>>{
+    return this.http.delete<ApiResponse<SaveResponse>>(
+      `${this.baseUrl}/${postId}/save`
+    )
+  }
+
+  getSavedPosts(): Observable<ApiResponse<{data: Post[]}>>{
+    return this.http.get<ApiResponse<{data: Post[]}>>(
+      `${this.baseUrl}/saved`
     )
   }
 }

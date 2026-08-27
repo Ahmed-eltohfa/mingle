@@ -1,6 +1,7 @@
 import Post from "../model/Post.js";
 import { getUploadUrl } from "../middlewares/uploadMiddleware.js";
 import { errorResponse, successResponse } from "../utils/apiResponse.js";
+import User from "../model/User.js";
 
 export const createPost = async (req, res) => {
   const media = (req.files || []).map((file) => ({
@@ -39,12 +40,18 @@ export const getPosts = async (req, res) => {
       return successResponse(res, { message: "No posts found", data: [] }, 200);
     }
 
+    const user = await User.findById(req.user.id).select("savedPosts")
+    const savedPosts = user?.savedPosts || []
+
     const postsWithLikes = postList.map((post) =>({
       ...post.toObject(),
       likeCount: post.likes.length,
       isLiked: post.likes.some(
         (userId) => String(userId) === String(req.user.id)
-      )
+      ),
+      isSaved: user?.savedPosts?.some(
+        (postId) => String(postId) === String(post._id)
+      ) ?? false,
     }))
 
     return successResponse(
@@ -194,4 +201,92 @@ export const unlikePost = async (req, res)=>{
     },
     "Post Unliked Successfully",
     200)
+}
+
+
+export const savePost = async (req, res) =>{
+  try{
+    const {postId} = req.params
+    const userId = req.user.id
+
+    const post = await Post.findOne({_id: postId, isDeleted: false})
+    if(!post){
+      return errorResponse(res, "Post Not Found", 404)
+    }
+
+    const user = await User.findOneAndUpdate(
+      {
+        _id: userId,
+        savedPosts: {$ne: postId}
+      },
+      {
+        $addToSet:{savedPosts: postId},
+      },
+      {new: true}
+    )
+    if(!user){
+      return errorResponse(res, "User Not Found", 404)
+    }
+    return successResponse(res, {postId}, "Post Saved Successfully", 200)
+  }
+  catch(err){
+    return errorResponse(res, err.message, 500)
+  }
+}
+
+
+export const unsavePost = async (req, res) =>{
+  try{
+    const {postId} = req.params
+    const userId = req.user.id
+    const post = await Post.findOne({_id: postId, isDeleted: false})
+    if(!post){
+      return errorResponse(res, "Post Not Found", 404)
+    }
+
+    const user = await User.findOneAndUpdate(
+      {
+        _id: userId,
+        isDeleted: false
+      },
+      {
+        $pull:{savedPosts: postId},
+      },
+      {new : true},
+    )
+
+    if(!user){
+      return errorResponse(res, "User Not Found", 404)
+    }
+
+    return successResponse(res, {postId}, "Post Unsaved Successfully", 200)
+  }
+  catch (err){
+    return errorResponse(res, err.message, 500)
+  }
+}
+
+
+export const getSavedPosts = async (req, res) =>{
+  try{
+    const userId = req.user.id
+
+    const user = await User.findById(userId).populate({
+      path: "savedPosts",
+      match: {isDeleted: false},
+      populate: {
+        path: "author",
+        select: "name username avatar",
+      },
+    })
+
+    if(!user){
+      return errorResponse(res, "User Not Found", 404)
+    }
+
+    return successResponse(res, {data: user.savedPosts}, "Saved Posts Succeeded!", 200)
+  }
+  catch (err){
+    return errorResponse(res, "Failed to fetch saved posts", 500, err.message)
+  }
 }

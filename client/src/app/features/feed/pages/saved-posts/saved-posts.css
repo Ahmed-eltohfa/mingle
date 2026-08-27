@@ -140,3 +140,17 @@
     'opsz' 24;
 }
 
+.saved-header {
+  margin-bottom: var(--space-2);
+}
+
+.saved-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.saved-header p {
+  margin: 4px 0 0;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+}
