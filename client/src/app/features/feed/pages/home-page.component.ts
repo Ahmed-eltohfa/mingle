@@ -92,4 +92,28 @@ export class HomePageComponent implements OnInit {
         }
       })
   }
+
+
+  protected toggleSave(post: Post): void{
+    const request = post.isSaved
+      ? this.postService.unsavePost(post._id)
+      : this.postService.savePost(post._id)
+
+    request.subscribe({
+      next: (response) =>{
+        this.posts.update((posts) =>
+          posts.map((p) => 
+          p._id === post._id
+            ? {
+              ...p,
+              isSaved: !p.isSaved,
+            }
+            : p))
+      },
+      error: (err) => {
+        console.error('Failed to toggle Save:', err);
+        
+      }
+    })
+  }
 }

@@ -50,8 +50,23 @@
           <span class="material-symbols-outlined">repeat</span>
           0
         </button>
-        <button type="button" class="bookmark" aria-label="Save post">
-          <span class="material-symbols-outlined">bookmark</span>
+        <button
+          type="button"
+          class="bookmark"
+          [class.saved]="post.isSaved"
+          [attr.aria-label]="post.isSaved ? 'Unsave post' : 'Save post'"
+          (click)="toggleSave(post)"
+        >
+          <span
+            class="material-symbols-outlined"
+            [style.font-variation-settings]="
+              post.isSaved
+                ? '\'FILL\' 1, \'wght\' 400, \'GRAD\' 0, \'opsz\' 24'
+                : '\'FILL\' 0, \'wght\' 400, \'GRAD\' 0, \'opsz\' 24'
+            "
+          >
+            bookmark
+          </span>
         </button>
       </footer>
       <app-comment [postId]="post._id"></app-comment>

@@ -23,6 +23,7 @@ export interface Post {
   isDeleted?: boolean;
   likeCount?: number;
   isLiked?: boolean;
+  isSaved?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -30,6 +31,10 @@ export interface Post {
 export interface LikeResponse{
   likeCount: number;
   isLiked: boolean;
+}
+
+export interface SaveResponse{
+  postId: string;
 }
 
 /** Matches the shape returned by your successResponse()/errorResponse() helpers. */
