@@ -17,6 +17,10 @@
     gap: var(--space-3);
 }
 
+.load-more-trigger {
+    height: 1px;
+}
+
 .post-card {
     overflow: hidden;
 }
@@ -80,6 +84,7 @@
     object-fit: cover;
     border-top: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
     border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
+    object-fit: contain;
 }
 
 .post-actions {
@@ -117,26 +122,25 @@
 }
 
 .post-actions button.liked {
-  color: #e91e63;
+    color: #e91e63;
 }
 
 .post-actions button.liked:hover {
-  color: #e91e63;
+    color: #e91e63;
 }
 
 .post-actions button.liked .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
 }
 
 .post-actions button:not(.liked) .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
 }
-

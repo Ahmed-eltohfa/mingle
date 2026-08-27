@@ -202,6 +202,7 @@
   object-fit: cover;
   border-top: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
   border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
+  object-fit: contain;
 }
 
 .post-actions {

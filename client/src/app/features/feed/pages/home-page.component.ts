@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, signal, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { PostService } from '../../post/services/post-service';
 import { Post } from '../../post/models/post.model';
@@ -12,26 +12,69 @@ import { CommentComponent } from './comment/comment.component';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnDestroy, OnInit {
   private readonly postService = inject(PostService);
+  private readonly pageSize = 10;
+  private intersectionObserver?: IntersectionObserver;
+
+  @ViewChild('loadMore')
+  private set loadMoreTrigger(trigger: ElementRef<HTMLElement> | undefined) {
+    if (typeof IntersectionObserver === 'undefined' || !trigger) {
+      return;
+    }
+
+    this.intersectionObserver?.disconnect();
+    this.intersectionObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        this.loadPosts();
+      }
+    }, { rootMargin: '320px 0px' });
+    this.intersectionObserver.observe(trigger.nativeElement);
+  }
 
   protected readonly posts = signal<Post[]>([]);
-  protected readonly isLoading = signal(true);
+  protected readonly isLoading = signal(false);
+  protected readonly isLoadingMore = signal(false);
+  protected readonly hasMore = signal(true);
+
+  private currentPage = 0;
 
   ngOnInit(): void {
     this.loadPosts();
   }
 
+  ngOnDestroy(): void {
+    this.intersectionObserver?.disconnect();
+  }
+
   protected loadPosts(): void {
-    this.postService.getPosts().subscribe({
+    if (this.isLoading() || this.isLoadingMore() || !this.hasMore()) {
+      return;
+    }
+
+    const page = this.currentPage + 1;
+    if (page === 1) {
+      this.isLoading.set(true);
+    } else {
+      this.isLoadingMore.set(true);
+    }
+
+    this.postService.getPosts(page, this.pageSize).subscribe({
       next: (response) => {
-        // Reads the array from response.data.data per PaginatedPosts interface
-        this.posts.set(response.data.data ?? []);
+        const nextPosts = response.data.data ?? [];
+        this.posts.update((current) => {
+          const existingIds = new Set(current.map((post) => post._id));
+          return [...current, ...nextPosts.filter((post) => !existingIds.has(post._id))];
+        });
+        this.currentPage = page;
+        this.hasMore.set(nextPosts.length === this.pageSize);
         this.isLoading.set(false);
+        this.isLoadingMore.set(false);
       },
       error: (err) => {
         console.error('Failed to fetch posts:', err);
         this.isLoading.set(false);
+        this.isLoadingMore.set(false);
       },
     });
   }

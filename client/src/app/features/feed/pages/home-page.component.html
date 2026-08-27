@@ -50,21 +50,13 @@
           <span class="material-symbols-outlined">repeat</span>
           0
         </button>
-        <button
-          type="button"
-          class="bookmark"
-          [class.saved]="post.isSaved"
-          [attr.aria-label]="post.isSaved ? 'Unsave post' : 'Save post'"
-          (click)="toggleSave(post)"
-        >
-          <span
-            class="material-symbols-outlined"
-            [style.font-variation-settings]="
+        <button type="button" class="bookmark" [class.saved]="post.isSaved"
+          [attr.aria-label]="post.isSaved ? 'Unsave post' : 'Save post'" (click)="toggleSave(post)">
+          <span class="material-symbols-outlined" [style.font-variation-settings]="
               post.isSaved
                 ? '\'FILL\' 1, \'wght\' 400, \'GRAD\' 0, \'opsz\' 24'
                 : '\'FILL\' 0, \'wght\' 400, \'GRAD\' 0, \'opsz\' 24'
-            "
-          >
+            ">
             bookmark
           </span>
         </button>
@@ -75,5 +67,10 @@
     <p class="no-posts">No posts found yet.</p>
     }
     }
+
+    @if (isLoadingMore()) {
+    <div class="loading-more" aria-live="polite">Loading more posts...</div>
+    }
+    <div #loadMore class="load-more-trigger" aria-hidden="true"></div>
   </section>
 </div>
