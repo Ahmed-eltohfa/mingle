@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mingle | Project Presentation</title>
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    :root {
+      --ink: #1e2732;
+      --muted: #617080;
+      --paper: #f5f7f4;
+      --white: #ffffff;
+      --teal: #087f8c;
+      --teal-dark: #075968;
+      --coral: #e76f51;
+      --gold: #e9b949;
+      --line: #d8e0df;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #dfe7e5; color: var(--ink); font-family: Georgia, 'Times New Roman', serif; }
+    .slide {
+      width: 297mm; min-height: 210mm; padding: 20mm 24mm 17mm; position: relative;
+      background: var(--paper); page-break-after: always; overflow: hidden;
+    }
+    .slide::after { content: ''; position: absolute; right: -34mm; top: -38mm; width: 110mm; height: 110mm; border: 18mm solid #d9eee9; border-radius: 50%; opacity: .8; }
+    .cover { display: flex; flex-direction: column; justify-content: center; background: var(--teal-dark); color: white; }
+    .cover::before { content: ''; position: absolute; width: 160mm; height: 160mm; right: -44mm; bottom: -72mm; border-radius: 50%; background: var(--coral); opacity: .9; }
+    .cover::after { border-color: rgba(255,255,255,.15); right: 20mm; top: 19mm; }
+    .eyebrow { color: var(--coral); font: 700 12px Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+    .cover .eyebrow { color: #ffcf82; }
+    h1 { font-size: 72px; line-height: .95; margin: 10px 0 18px; letter-spacing: -2px; }
+    h2 { font-size: 36px; line-height: 1.05; margin: 7px 0 22px; color: var(--teal-dark); }
+    h3 { font: 700 17px Arial, sans-serif; margin: 0 0 7px; color: var(--teal-dark); }
+    p, li { font-size: 17px; line-height: 1.45; }
+    .cover p { max-width: 150mm; font-size: 24px; color: #d8efed; }
+    .meta { position: absolute; left: 24mm; bottom: 17mm; font: 12px Arial, sans-serif; color: #b9d8d6; }
+    .slide-number { position: absolute; right: 24mm; bottom: 13mm; color: var(--muted); font: 12px Arial, sans-serif; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14mm; position: relative; z-index: 1; }
+    .grid.three { grid-template-columns: repeat(3, 1fr); gap: 8mm; }
+    .panel { background: var(--white); border: 1px solid var(--line); border-radius: 7px; padding: 17px 19px; box-shadow: 0 5px 18px rgba(30,39,50,.05); }
+    .panel p { margin: 0; color: var(--muted); }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 7px 0; }
+    .accent { border-top: 5px solid var(--coral); }
+    .teal { border-top: 5px solid var(--teal); }
+    .gold { border-top: 5px solid var(--gold); }
+    .stack { display: flex; flex-direction: column; gap: 10px; }
+    .flow { display: flex; align-items: stretch; gap: 7px; margin: 20px 0; position: relative; z-index: 1; }
+    .step { flex: 1; padding: 16px 12px; background: white; border: 1px solid var(--line); border-radius: 6px; text-align: center; }
+    .step strong { display: block; font: 700 16px Arial, sans-serif; color: var(--teal-dark); }
+    .step span { display: block; margin-top: 7px; color: var(--muted); font: 13px Arial, sans-serif; }
+    .arrow { align-self: center; color: var(--coral); font: 26px Arial, sans-serif; }
+    .code { background: #1f2d36; color: #d9f2ed; border-radius: 6px; padding: 16px 18px; font: 14px/1.65 Consolas, monospace; white-space: pre-wrap; }
+    .tag { display: inline-block; margin: 3px 4px 3px 0; padding: 6px 9px; background: #e3f2ef; border-radius: 4px; color: var(--teal-dark); font: 700 12px Arial, sans-serif; }
+    .footer-note { margin-top: 18px; color: var(--muted); font: 12px Arial, sans-serif; }
+    @media screen { .slide { margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,.12); } }
+    @media print { body { background: white; } .slide { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <section class="slide cover">
+    <div class="eyebrow">Full-stack social media application</div>
+    <h1>Mingle</h1>
+    <p>A focused social experience for sharing posts, media, reactions, comments, and saved content.</p>
+    <div class="meta">Project presentation · August 2026</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">01 · Overview</div>
+    <h2>What is Mingle?</h2>
+    <div class="grid">
+      <div class="panel accent"><h3>Product idea</h3><p>Mingle is a social network-style application where authenticated users can create and discover updates, interact with posts, and manage a personal profile.</p></div>
+      <div class="panel teal"><h3>Primary experience</h3><p>The home feed is the center of the product: posts are loaded from the API, rendered as cards, and progressively fetched as the user scrolls.</p></div>
+      <div class="panel gold"><h3>Audience</h3><p>People who want a lightweight space for personal updates, visual media, conversation, and quick social actions.</p></div>
+      <div class="panel accent"><h3>Current product surface</h3><p>Authentication, home feed, post creation, explore, profile, edit profile, saved posts, comments, responsive navigation, and reserved routes for future features.</p></div>
+    </div>
+    <div class="slide-number">2</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">02 · Architecture</div>
+    <h2>Two applications, one API contract</h2>
+    <div class="flow">
+      <div class="step"><strong>Angular client</strong><span>Standalone components<br>Signals · RxJS · SSR</span></div><div class="arrow">→</div>
+      <div class="step"><strong>HTTP API</strong><span>Express routes<br>JSON · multipart uploads</span></div><div class="arrow">→</div>
+      <div class="step"><strong>Middleware</strong><span>JWT protection<br>Validation · upload handling</span></div><div class="arrow">→</div>
+      <div class="step"><strong>MongoDB</strong><span>Mongoose models<br>Users · posts · comments</span></div>
+    </div>
+    <div class="grid three">
+      <div class="panel teal"><h3>Client</h3><p>Angular 22.1.5, TypeScript 6, Angular SSR, standalone lazy-loaded routes, responsive layout components.</p></div>
+      <div class="panel accent"><h3>Server</h3><p>Node.js with Express 5.2.1, CORS, dotenv, JWT, bcryptjs, Multer, and async request handlers.</p></div>
+      <div class="panel gold"><h3>Persistence</h3><p>MongoDB is accessed through Mongoose. Uploads are exposed from the server's <strong>/uploads</strong> directory.</p></div>
+    </div>
+    <div class="slide-number">3</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">03 · Features</div>
+    <h2>Core user journeys</h2>
+    <div class="grid three">
+      <div class="panel accent"><h3>Join and sign in</h3><ul><li>Registration with name, username, email, and password.</li><li>Password hashing with bcryptjs.</li><li>JWT login token with one-day expiry.</li><li>Guest and authenticated route guards.</li></ul></div>
+      <div class="panel teal"><h3>Share and discover</h3><ul><li>Create posts with text and up to five media files.</li><li>Image and video rendering with alt text.</li><li>Home feed sorted newest first.</li><li>Explore post and user search.</li></ul></div>
+      <div class="panel gold"><h3>Interact and manage</h3><ul><li>Like and unlike posts and comments.</li><li>Save and unsave posts.</li><li>Create, edit, delete, and like comments.</li><li>View and update profile information.</li></ul></div>
+    </div>
+    <p class="footer-note">Responsive navigation includes side navigation on larger screens and bottom navigation on smaller screens.</p>
+    <div class="slide-number">4</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">04 · Feed pagination</div>
+    <h2>Infinite scroll with server pagination</h2>
+    <div class="grid">
+      <div class="panel teal"><h3>Backend contract</h3><div class="code">GET /api/posts?page=1&limit=10
+
+{ success: true,
+  data: {
+    data: [ ...posts ],
+    page: 1,
+    limit: 10,
+    count: 10
+  }
+}</div></div>
+      <div class="panel accent"><h3>Client behavior</h3><ul><li>An IntersectionObserver watches a bottom sentinel.</li><li>Requests are guarded so only one page loads at a time.</li><li>New pages append to the existing signal.</li><li>Duplicate post IDs are filtered.</li><li>Loading stops when a page contains fewer than 10 posts or is empty.</li></ul></div>
+    </div>
+    <div class="flow">
+      <div class="step"><strong>Page 1</strong><span>Initial feed request</span></div><div class="arrow">→</div><div class="step"><strong>Sentinel visible</strong><span>Observer fires near bottom</span></div><div class="arrow">→</div><div class="step"><strong>Page N</strong><span>Append posts to feed</span></div><div class="arrow">→</div><div class="step"><strong>End reached</strong><span>Stop when page is short</span></div>
+    </div>
+    <div class="slide-number">5</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">05 · Data model</div>
+    <h2>Domain objects and relationships</h2>
+    <div class="grid three">
+      <div class="panel accent"><h3>User</h3><p>Identity, email, hashed password, role, bio, avatar, deletion status, and references to saved posts.</p><div style="margin-top:10px"><span class="tag">name</span><span class="tag">username</span><span class="tag">email</span><span class="tag">avatar</span><span class="tag">savedPosts[]</span></div></div>
+      <div class="panel teal"><h3>Post</h3><p>Author, text content, media collection, visibility, likes, timestamps, and soft-delete fields.</p><div style="margin-top:10px"><span class="tag">author</span><span class="tag">content</span><span class="tag">media[]</span><span class="tag">likes[]</span><span class="tag">visibility</span></div></div>
+      <div class="panel gold"><h3>Comment</h3><p>Text, user, post, optional parent comment for nesting, likes, timestamps, and soft-delete fields.</p><div style="margin-top:10px"><span class="tag">content</span><span class="tag">user</span><span class="tag">post</span><span class="tag">parentComment</span><span class="tag">likes[]</span></div></div>
+    </div>
+    <div class="panel" style="margin-top:14mm; position:relative; z-index:1"><h3>Relationship summary</h3><p>A user authors posts, comments belong to both a user and a post, posts maintain a list of users who liked them, and users maintain saved-post references.</p></div>
+    <div class="slide-number">6</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">06 · API map</div>
+    <h2>Server routes at a glance</h2>
+    <div class="grid">
+      <div class="panel accent"><h3>Authentication · /api/auth</h3><ul><li><strong>POST /register</strong> creates an account.</li><li><strong>POST /login</strong> returns a JWT.</li><li><strong>GET /protected</strong> checks a legacy auth middleware path.</li></ul></div>
+      <div class="panel teal"><h3>Users · /api/users</h3><ul><li><strong>GET /me</strong> retrieves the current user.</li><li><strong>GET /:userId</strong> retrieves a user.</li><li><strong>PATCH /:userId</strong> updates profile and avatar.</li><li><strong>DELETE /:userId</strong> removes a user.</li></ul></div>
+      <div class="panel gold"><h3>Posts · /api/posts</h3><ul><li>CRUD operations and paginated feed.</li><li>Search and saved-post retrieval.</li><li>Like/unlike and save/unsave actions.</li><li>Multipart media upload support.</li></ul></div>
+      <div class="panel accent"><h3>Comments · /api/comments</h3><ul><li>Create and list comments by post.</li><li>Update and delete owned comments.</li><li>Like, unlike, and inspect comment likes.</li></ul></div>
+    </div>
+    <div class="slide-number">7</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">07 · Project structure</div>
+    <h2>Where the code lives</h2>
+    <div class="grid">
+      <div class="panel teal"><h3>client/src/app</h3><div class="code">core/
+  auth-interceptor.ts
+  guards/
+  layout/
+features/
+  auth/
+  explore/
+  feed/
+  post/
+  profile/
+  static/
+shared/
+  components/
+  models/</div></div>
+      <div class="panel accent"><h3>server</h3><div class="code">controllers/
+  authController.js
+  commentController.js
+  postController.js
+  userController.js
+middlewares/
+  authMiddleware.js
+  uploadMiddleware.js
+  validationMiddleware.js
+model/
+  User.js · Post.js · Comment.js
+routes/
+  authRoutes.js · postRoutes.js
+  userRoutes.js · commentRoutes.js</div></div>
+    </div>
+    <p class="footer-note">The client uses lazy-loaded standalone components; the server separates routing, controllers, models, middleware, and utilities.</p>
+    <div class="slide-number">8</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">08 · Running the project</div>
+    <h2>Local development workflow</h2>
+    <div class="grid">
+      <div class="panel accent"><h3>Start the API</h3><div class="code">cd server
+npm install
+npm run dev</div><p style="margin-top:10px">The server uses <strong>PORT</strong> from the environment, defaulting to 5000. The client currently targets localhost:3000 for API calls, so align the configured port before running end to end.</p></div>
+      <div class="panel teal"><h3>Start the client</h3><div class="code">cd client
+npm install
+npm start</div><p style="margin-top:10px">Open <strong>http://localhost:4200/</strong>. Production build: <strong>npm run build</strong>. Unit tests: <strong>npm test</strong>.</p></div>
+    </div>
+    <div class="panel gold" style="margin-top:14mm; position:relative; z-index:1"><h3>Required environment</h3><p>Configure the MongoDB connection and JWT secret in the server environment. The client and API must agree on the API host and port. Authenticated requests require the JWT interceptor/token flow.</p></div>
+    <div class="slide-number">9</div>
+  </section>
+
+  <section class="slide">
+    <div class="eyebrow">09 · Status and next steps</div>
+    <h2>What is complete, and what remains</h2>
+    <div class="grid">
+      <div class="panel teal"><h3>Implemented</h3><ul><li>Authenticated Angular shell and route guards.</li><li>Post feed with infinite scroll pagination.</li><li>Post creation with media upload.</li><li>Likes, saves, comments, profile, and explore flows.</li><li>Responsive desktop and mobile navigation.</li></ul></div>
+      <div class="panel accent"><h3>Next improvements</h3><ul><li>Add automated server tests and focused feed component tests.</li><li>Return total pages or an explicit <strong>hasMore</strong> field from the feed API.</li><li>Resolve the configured client/API port mismatch for local startup.</li><li>Complete notifications, messages, and settings routes.</li><li>Add production environment configuration and stronger error UX.</li></ul></div>
+    </div>
+    <p class="footer-note">This summary is based on the current source tree and reflects the implementation available in August 2026.</p>
+    <div class="slide-number">10</div>
+  </section>
+</body>
+</html>
