@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthApiService } from '../../../features/auth/services/auth-api.service';
+import { UserService } from '../../../features/profile/services/user.service';
 import { NavItem } from '../../models/nav-item';
 
 @Component({
@@ -9,6 +11,10 @@ import { NavItem } from '../../models/nav-item';
   styleUrl: './side-nav.component.css',
 })
 export class SideNavComponent {
+  private readonly authApi = inject(AuthApiService);
+  private readonly userService = inject(UserService);
+  private readonly router = inject(Router);
+
   protected readonly navItems: NavItem[] = [
     { label: 'Home', icon: 'home', route: '/home', exact: true },
     { label: 'Explore', icon: 'explore', route: '/explore', exact: true },
@@ -24,4 +30,10 @@ export class SideNavComponent {
     { label: 'Saved', icon: 'bookmark', route: '/saved', exact: true },
     { label: 'Settings', icon: 'settings', route: '/settings', exact: true },
   ];
+
+  handleLogout(): void {
+    this.authApi.logout();
+    this.userService.clearCurrentUser();
+    this.router.navigate(['/login']);
+  }
 }

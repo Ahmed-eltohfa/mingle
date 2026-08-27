@@ -17,6 +17,10 @@ export class UserService {
     );
   }
 
+  clearCurrentUser(): void {
+    this.currentUser.set(null);
+  }
+
   updateProfile(userId: string, payload: FormData): Observable<UserResponse> {
     return this.http.patch<UserResponse>(`${this.baseUrl}/${userId}`, payload).pipe(
       tap((res) => this.currentUser.set(res.user)) // Update state after saving

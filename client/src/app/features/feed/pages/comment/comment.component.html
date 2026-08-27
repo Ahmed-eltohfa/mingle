@@ -1,5 +1,4 @@
 <section class="comments-section">
-<<<<<<< HEAD
   <!-- New Comment Input Box -->
   <div class="add-comment-row">
     <img [src]="getAuthorAvatar(currentUser())" [alt]="getAuthorName(currentUser()) + ' avatar'"
@@ -100,63 +99,4 @@
     }
   </div>
   }
-=======
-    <h4>Comments</h4>
-
-    @if(isLoading()){
-        <p>Loading Comments... </p>
-    } @else if(errorMessage()){
-        <p class="error-text">{{ errorMessage() }}</p>
-    } @else if(comments().length === 0){
-        <p class="no-comments">no Comments yet</p>
-    } @else{
-        @for(comment of comments(); track comment._id){
-            <article class="comment">
-                <div class="comment-header">
-                    <img
-                        [src]="comment.user.avatar || 'https://picsum.photos/seed/' + comment.user.username + '/50/50'"
-                        [alt]="comment.user.username + ' avatar'"
-                    />
-                    <div>
-                        <strong>{{ comment.user.username }}</strong>
-                        <small>{{ comment.createdAt | date: 'short' }}</small>
-                    </div>
-                </div>
-                <p class="comment-content">{{ comment.content }}</p>
-
-                <div class="comment-actions">
-                    <button type="button">❤️ {{ comment.likesCount }}</button>
-                    <button type="button">Reply</button>
-                </div>
-
-                @if (comment.replies && comment.replies.length > 0){
-                    <div class="replies">
-                        @for (reply of comment.replies ; track reply._id){
-                            <article class="reply">
-                                <div class="comment-header">
-                                    <img
-                                        [src]="reply.user.avatar || 'https://picsum.photos/seed/' + reply.user.username + '/40/40'"
-                                        [alt]="reply.user.username + ' avatar'"
-                                        />
-                                    <div>
-                                    <strong>{{ reply.user.username }}</strong>
-                                    <small>{{ reply.createdAt | date: 'short' }}</small>
-                                </div>
-
-                                </div>
-
-                                <p class="comment-content">{{ reply.content }}</p>
-
-                                <div class="comment-actions">
-                                    <button type="button">❤️ {{ reply.likesCount }}</button>
-                                </div>
-
-                            </article>
-                        }
-                    </div>
-                }
-            </article>
-        }
-    }
->>>>>>> origin/main
 </section>

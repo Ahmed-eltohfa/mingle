@@ -17,14 +17,15 @@ export class AuthApiService {
   );
 }
 
-logout() {
+logout(): void {
   localStorage.removeItem('token');
 }
-  signUp(data: any) {
-    return this.http.post<any>(
-      `${this.apiUrl}/register`,
-      data
-    );
-  }
+
+signUp(data: any) {
+  return this.http.post<any>(
+    `${this.apiUrl}/register`,
+    data
+  );
+}
 
 }
