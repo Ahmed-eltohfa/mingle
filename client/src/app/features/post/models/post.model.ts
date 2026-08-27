@@ -21,8 +21,15 @@ export interface Post {
   media: PostMedia[];
   visibility: PostVisibility;
   isDeleted?: boolean;
+  likeCount?: number;
+  isLiked?: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface LikeResponse{
+  likeCount: number;
+  isLiked: boolean;
 }
 
 /** Matches the shape returned by your successResponse()/errorResponse() helpers. */

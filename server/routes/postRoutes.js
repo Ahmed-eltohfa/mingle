@@ -6,6 +6,8 @@ import {
   getPosts,
   updatePostById,
   searchPosts,
+  likePost,
+  unlikePost
 } from "../controllers/postController.js";
 import { upload } from "../middlewares/uploadMiddleware.js";
 import asyncHandler from "../utils/asyncHandler.js";
@@ -13,7 +15,7 @@ import { protect } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.post("/", upload.array("media", 5), protect, asyncHandler(createPost));
-router.get("/", asyncHandler(getPosts));
+router.get("/", protect, asyncHandler(getPosts));
 router.get("/search", asyncHandler(searchPosts));
 router.get("/:postId", asyncHandler(getPostById));
 
@@ -24,5 +26,9 @@ router.patch(
   asyncHandler(updatePostById),
 );
 router.delete("/:postId", protect, asyncHandler(deletePostById));
+
+router.post("/:postId/like", protect, asyncHandler(likePost))
+router.delete("/:postId/like", protect, asyncHandler(unlikePost))
+router.get("/postId/likes", protect, asyncHandler())
 
 export default router;

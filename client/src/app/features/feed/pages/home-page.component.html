@@ -36,9 +36,11 @@
       }
 
       <footer class="post-actions">
-        <button type="button">
-          <span class="material-symbols-outlined">favorite</span>
-          0
+        <button type="button" [class.liked]="post.isLiked" (click)="toggleLike(post)">
+          <span class="material-symbols-outlined">
+            {{ post.isLiked ? 'favorite' : 'favorite_border' }}
+          </span>
+          {{ post.likeCount ?? 0 }}
         </button>
         <button type="button">
           <span class="material-symbols-outlined">chat_bubble</span>
