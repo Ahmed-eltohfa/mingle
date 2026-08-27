@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, signal, inject } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, signal, inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs';
@@ -6,6 +6,7 @@ import { PostService } from '../services/post-service';
 import { Post } from '../models/post.model';
 import { UserService } from '../../profile/services/user.service';
 import { User } from '../../profile/models/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 interface MediaPreview {
   url: string;
@@ -25,6 +26,7 @@ const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB, matches server-side multer lim
 export class CreatePostComponent implements OnInit, OnDestroy {
   private readonly postService = inject(PostService);
   private readonly userService = inject(UserService);
+  private readonly platformId = inject(PLATFORM_ID);
 
   @Output() created = new EventEmitter<Post>();
 
@@ -101,11 +103,13 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (!this.userService.currentUser()) {
-      this.userService.getCurrentUser().subscribe({
-        error: (err) => console.error('Failed to load current user for create-post:', err),
-      });
-    }
+      if(isPlatformBrowser(this.platformId)){
+        if (!this.userService.currentUser()) {
+          this.userService.getCurrentUser().subscribe({
+            error: (err) => console.error('Failed to load current user for create-post:', err),
+          });
+        }
+      }
   }
 
   protected getAuthorName(user: User | null): string {
