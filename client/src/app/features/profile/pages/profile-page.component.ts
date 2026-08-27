@@ -1,7 +1,8 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, OnInit, signal, inject, PLATFORM_ID } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { RouterLink } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-profile-page',
   standalone: true,
@@ -11,6 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProfilePageComponent implements OnInit {
   private readonly userService = inject(UserService);
+  private readonly platformId = inject(PLATFORM_ID)
 
   protected readonly user = signal<User | null>(null);
   protected readonly isLoading = signal(true);
@@ -25,6 +27,9 @@ export class ProfilePageComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    if(!isPlatformBrowser(this.platformId)){
+      return;
+    }
     this.userService.getCurrentUser().subscribe({
       next: (res) => {
         this.user.set(res.user);

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, signal, inject } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, Input, OnInit, signal, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DatePipe, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Comment, ApiResponse } from '../../../post/models/comment.models';
@@ -16,6 +16,7 @@ import { UserService } from '../../../profile/services/user.service';
 export class CommentComponent implements OnInit {
   private readonly commentService = inject(CommentService);
   private readonly userService = inject(UserService);
+  private readonly platformId = inject(PLATFORM_ID);
 
   @Input({ required: true }) postId!: string;
 
@@ -34,6 +35,9 @@ export class CommentComponent implements OnInit {
   protected readonly isSubmittingReply = signal(false);
 
   ngOnInit(): void {
+    if(!isPlatformBrowser(this.platformId)){
+      return;
+    }
     if (!this.userService.currentUser()) {
       this.userService.getCurrentUser().subscribe({
         error: () => { },
