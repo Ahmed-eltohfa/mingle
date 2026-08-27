@@ -65,4 +65,31 @@ export class HomePageComponent implements OnInit {
     const seed = typeof author === 'string' ? author : author?.username || 'user';
     return `https://picsum.photos/seed/${seed}/80/80`;
   }
+
+  protected toggleLike(post:Post): void{
+    //console.log('LIKED CLICKED', post._id);
+
+    const request = post.isLiked
+      ? this.postService.unlikePost(post._id) : this.postService.likePost(post._id)
+    
+      request.subscribe({
+        next: (response) =>{
+          this.posts.update((posts) => 
+            posts.map((p) => 
+              p._id === post._id
+                ?{
+                  ...p,
+                  likeCount: response.data.likeCount,
+                  isLiked: response.data.isLiked,
+                }
+                : p
+            )
+          )
+        },
+        error: (err) => {
+          console.error('Failed to toggle Like: ', err);
+          
+        }
+      })
+  }
 }

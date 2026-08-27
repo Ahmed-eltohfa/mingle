@@ -39,15 +39,24 @@ export const getPosts = async (req, res) => {
       return successResponse(res, { message: "No posts found", data: [] }, 200);
     }
 
+    const postsWithLikes = postList.map((post) =>({
+      ...post.toObject(),
+      likeCount: post.likes.length,
+      isLiked: post.likes.some(
+        (userId) => String(userId) === String(req.user.id)
+      )
+    }))
+
     return successResponse(
       res,
-      { data: postList, page, limit, count: postList.length },
+      { data: postsWithLikes, page, limit, count: postsWithLikes.length },
       200,
     );
   } catch (err) {
     return errorResponse(res, "failed to fetch data", 500, err.message);
   }
 };
+
 export const searchPosts = async (req, res) => {
   try {
     const { q = "" } = req.query;
@@ -134,3 +143,55 @@ export const deletePostById = async (req, res) => {
     return errorResponse(res, "Failed to delete post", 500, err.message);
   }
 };
+
+
+export const likePost = async(req, res)=>{
+  const{postId} = req.params;
+  const userId = req.user.id;
+
+  const post = await Post.findOne({_id: postId, isDeleted: false});
+
+  if(!post){
+    return errorResponse(res, 'Post Not Found', 404);
+  }
+
+  console.log('USER:', userId);
+  console.log('LIKES:', post.likes);
+
+  if(post.likes.includes(userId)){
+    return errorResponse(res, 'Post already Liked', 400)
+  }
+
+  post.likes.push(userId)
+  await post.save()
+  return successResponse(res,{
+    likeCount: post.likes.length,
+    isLiked: true
+    },
+    'Post Liked Successfully',
+    200)
+};
+
+
+export const unlikePost = async (req, res)=>{
+  const {postId} = req.params;
+  const userId = req.user.id;
+  const post = await Post.findOneAndUpdate(
+                                  {_id: postId, isDeleted: false},
+                                  {
+                                    $pull: {likes: userId}
+                                  },
+                                  {new: true}
+  );
+
+  if(!post){
+    return errorResponse(res, 'Post Not Found', 404)
+  }
+
+  return successResponse(res, {
+    likeCount: post.likes.length,
+    isLiked: false
+    },
+    "Post Unliked Successfully",
+    200)
+}

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {
   ApiResponse,
   CreatePostPayload,
+  LikeResponse,
   PaginatedPosts,
   Post,
   UpdatePostPayload,
@@ -66,5 +67,18 @@ export class PostService {
     (payload.files ?? []).forEach((file) => formData.append('media', file));
 
     return formData;
+  }
+
+
+  likePost(postId: string): Observable<ApiResponse<LikeResponse>>{
+    return this.http.post<ApiResponse<any>>(
+      `${this.baseUrl}/${postId}/like`, {}
+    );
+  }
+
+  unlikePost(postId: string): Observable<ApiResponse<LikeResponse>>{
+    return this.http.delete<ApiResponse<any>>(
+      `${this.baseUrl}/${postId}/like`
+    )
   }
 }
