@@ -8,7 +8,7 @@ export class AuthApiService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:5000/api/auth';
+  private readonly apiUrl = 'http://localhost:3000/api/auth';
 
   signIn(data: any) {
   return this.http.post<any>(
