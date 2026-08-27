@@ -1,12 +1,13 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { PostService } from '../../post/services/post-service'; // Adjust relative path
-import { Post } from '../../post/models/post.model'; // Adjust relative path
+import { PostService } from '../../post/services/post-service';
+import { Post } from '../../post/models/post.model';
+import { CommentComponent } from './comment/comment.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CommentComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })

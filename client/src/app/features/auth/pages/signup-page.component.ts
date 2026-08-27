@@ -58,6 +58,12 @@ export class SignupPageComponent {
   }
 
   protected submit(): void {
+    
+    console.log(`SUBMIT CLICKED`);
+    console.log('FORM VALID:', this.signupForm.valid);
+    console.log('FORM VALUE:', this.signupForm.getRawValue());
+    
+
     this.formError.set('');
 
     if (this.signupForm.invalid) {
