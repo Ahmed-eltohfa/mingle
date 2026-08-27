@@ -1,64 +1,64 @@
 <section class="mingle-card compose-card">
-    <form [formGroup]="postForm" (ngSubmit)="submit()">
-        <div class="compose-row">
-            <img src="https://picsum.photos/seed/mingle-me/80/80" alt="Your avatar" />
-            <textarea formControlName="content" placeholder="What's on your mind?"></textarea>
-        </div>
+  <form [formGroup]="postForm" (ngSubmit)="submit()">
+    <div class="compose-row">
+      <img [src]="getAuthorAvatar(currentUser())" [alt]="getAuthorName(currentUser()) + ' avatar'" loading="lazy" />
+      <textarea formControlName="content" placeholder="What's on your mind?"></textarea>
+    </div>
 
-        <!-- Media Previews Grid -->
-        @if (mediaPreviews().length > 0) {
-        <div class="preview-container">
-            @for (media of mediaPreviews(); track media.url; let i = $index) {
-            <div class="preview-item">
-                @if (media.type === 'video') {
-                <video [src]="media.url" controls></video>
-                } @else {
-                <img [src]="media.url" alt="Preview" />
-                }
-                <button type="button" class="remove-btn" aria-label="Remove media" (click)="removeFile(i)">✕</button>
-            </div>
-            }
-        </div>
-
-        <!-- Alt Text Field (Mapped to req.body.altText in backend) -->
-        <div class="alt-wrap">
-            <input type="text" formControlName="altText" placeholder="Add alt text for your media..."
-                class="alt-input" />
-        </div>
+    <!-- Media Previews Grid -->
+    @if (mediaPreviews().length > 0) {
+    <div class="preview-container">
+      @for (media of mediaPreviews(); track media.url; let i = $index) {
+      <div class="preview-item">
+        @if (media.type === 'video') {
+        <video [src]="media.url" controls></video>
+        } @else {
+        <img [src]="media.url" alt="Preview" />
         }
+        <button type="button" class="remove-btn" aria-label="Remove media" (click)="removeFile(i)">
+          ✕
+        </button>
+      </div>
+      }
+    </div>
 
-        @if (errorMessage()) {
-        <p class="error-text">{{ errorMessage() }}</p>
-        }
+    <!-- Alt Text Field (Mapped to req.body.altText in backend) -->
+    <div class="alt-wrap">
+      <input type="text" formControlName="altText" placeholder="Add alt text for your media..." class="alt-input" />
+    </div>
+    }
 
-        <div class="compose-actions">
-            <div class="left-actions">
-                <!-- Hidden File Inputs -->
-                <input #imageInput type="file" multiple accept="image/*" (change)="onFileSelected($event)" hidden />
-                <input #videoInput type="file" multiple accept="video/*" (change)="onFileSelected($event)" hidden />
+    @if (errorMessage()) {
+    <p class="error-text">{{ errorMessage() }}</p>
+    }
 
-                <!-- Image Upload Button -->
-                <button type="button" aria-label="Upload image" (click)="imageInput.click()">
-                    <span class="material-symbols-outlined">image</span>
-                </button>
+    <div class="compose-actions">
+      <div class="left-actions">
+        <!-- Hidden File Inputs -->
+        <input #imageInput type="file" multiple accept="image/*" (change)="onFileSelected($event)" hidden />
+        <input #videoInput type="file" multiple accept="video/*" (change)="onFileSelected($event)" hidden />
 
-                <!-- Video Upload Button -->
-                <button type="button" aria-label="Upload video" (click)="videoInput.click()">
-                    <span class="material-symbols-outlined">videocam</span>
-                </button>
+        <!-- Image Upload Button -->
+        <button type="button" aria-label="Upload image" (click)="imageInput.click()">
+          <span class="material-symbols-outlined">image</span>
+        </button>
 
-                <!-- Visibility Selector -->
-                <select formControlName="visibility" class="visibility-select">
-                    <option value="public">Public</option>
-                    <option value="followers">Followers</option>
-                    <option value="private">Private</option>
-                </select>
-            </div>
+        <!-- Video Upload Button -->
+        <button type="button" aria-label="Upload video" (click)="videoInput.click()">
+          <span class="material-symbols-outlined">videocam</span>
+        </button>
 
-            <button type="submit" class="mingle-button-primary post-btn"
-                [disabled]="postForm.invalid || isSubmitting()">
-                {{ isSubmitting() ? 'Posting...' : 'Post' }}
-            </button>
-        </div>
-    </form>
+        <!-- Visibility Selector -->
+        <select formControlName="visibility" class="visibility-select">
+          <option value="public">Public</option>
+          <option value="followers">Followers</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+
+      <button type="submit" class="mingle-button-primary post-btn" [disabled]="postForm.invalid || isSubmitting()">
+        {{ isSubmitting() ? 'Posting...' : 'Post' }}
+      </button>
+    </div>
+  </form>
 </section>

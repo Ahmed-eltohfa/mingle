@@ -1,9 +1,33 @@
-<div class="feed-page">
-  <app-create-post (created)="onPostCreated($event)"></app-create-post>
+<div class="explore-page">
+  <div class="search-container">
+    <div class="search-bar">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" placeholder="Search posts and ideas..." [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
+      @if (searchQuery) {
+      <button type="button" class="clear-btn" (click)="clearSearch()" aria-label="Clear search">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      }
+      <button
+        type="button"
+        (click)="onSearch()"
+        class="search-btn"
+        [disabled]="!searchQuery.trim() || isLoading()"
+      >
+        Search
+      </button>
+    </div>
+  </div>
 
-  <section class="feed-list" aria-label="Feed posts">
-    @if (isLoading()) {
-    <div class="loading-spinner">Loading posts...</div>
+  <section class="feed-list" aria-label="Explore posts">
+    @if (!hasSearched()) {
+    <div class="explore-placeholder mingle-card">
+      <span class="material-symbols-outlined">explore</span>
+      <h3>Explore Mingle</h3>
+      <p>Search for keywords, topics, or ideas to discover posts from the community.</p>
+    </div>
+    } @else if (isLoading()) {
+    <div class="loading-spinner">Searching posts...</div>
     } @else {
     @for (post of posts(); track post._id) {
     <article class="mingle-card post-card">
@@ -12,7 +36,7 @@
           <img [src]="getAuthorAvatar(post.author)" [alt]="getAuthorName(post.author) + ' avatar'" loading="lazy" />
           <div>
             <h3>{{ getAuthorName(post.author) }}</h3>
-            <p>{{ post.createdAt | date: 'shortTime' }}</p>
+            <p>{{ post.createdAt | date:'shortTime' }}</p>
           </div>
         </div>
 
@@ -52,10 +76,11 @@
           <span class="material-symbols-outlined">bookmark</span>
         </button>
       </footer>
-      <app-comment [postId]="post._id"></app-comment>
     </article>
     } @empty {
-    <p class="no-posts">No posts found yet.</p>
+    <div class="no-posts">
+      <p>No posts found matching "{{ searchQuery }}".</p>
+    </div>
     }
     }
   </section>

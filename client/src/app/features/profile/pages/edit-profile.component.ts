@@ -53,20 +53,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   protected onSubmit(): void {
-  const currentUserId = this.userService.currentUser()?._id;
-  if (!currentUserId || this.profileForm.invalid) return;
+    const currentUserId = this.userService.currentUser()?._id;
+    if (!currentUserId || this.profileForm.invalid) return;
 
-  const formData = new FormData();
-  formData.append('name', this.profileForm.controls.name.value);
-  formData.append('username', this.profileForm.controls.name.value);
-  formData.append('bio', this.profileForm.controls.bio.value);
-  if (this.selectedAvatarFile) {
-    formData.append('avatar', this.selectedAvatarFile);
+    const formData = new FormData();
+    formData.append('name', this.profileForm.controls.name.value);
+    formData.append('bio', this.profileForm.controls.bio.value);
+    if (this.selectedAvatarFile) {
+      formData.append('avatar', this.selectedAvatarFile);
+    }
+
+    this.userService.updateProfile(currentUserId, formData).subscribe({
+      next: () => void this.router.navigateByUrl('/profile'),
+      error: (err) => console.error('Failed to update profile:', err)
+    });
   }
-
-  this.userService.updateProfile(currentUserId, formData).subscribe({
-    next: () => void this.router.navigateByUrl('/profile'),
-    error: (err) => console.error('Failed to update profile:', err)
-  });
-}
 }
