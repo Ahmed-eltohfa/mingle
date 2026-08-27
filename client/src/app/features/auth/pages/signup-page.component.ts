@@ -82,12 +82,12 @@ export class SignupPageComponent {
     this.isSubmitting.set(true);
 
     this.authApi
-      .signUp({
-        name: fullName,
-        username,
-        email,
-        password,
-      })
+  .signUp({
+    name: fullName,
+    username,
+    email,
+    password
+  })
       .pipe(finalize(() => this.isSubmitting.set(false)))
       .subscribe({
         next: () => {

@@ -6,15 +6,17 @@ export interface PostMedia {
   type: MediaType;
   altText: string;
 }
-export interface Author {
+
+export interface PostAuthor {
   _id: string;
-  username: string;
+  name?: string;
+  username?: string;
   avatar?: string;
 }
 
 export interface Post {
   _id: string;
-  author: Author;
+  author: string | PostAuthor;
   content: string;
   media: PostMedia[];
   visibility: PostVisibility;

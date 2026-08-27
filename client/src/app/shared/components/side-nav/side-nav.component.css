@@ -79,30 +79,3 @@
         display: block;
     }
 }
-
-.logout-button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px 16px;
-
-    background: #dc2626;
-    color: #ffffff;
-
-    border: 1px solid #dc2626;
-    border-radius: 10px;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.logout-button:hover {
-    background: #b91c1c;
-    border-color: #b91c1c;
-}
-
-.logout-button:active {
-    transform: scale(0.98);
-}

@@ -6,8 +6,15 @@ import {
   CreatePostPayload,
   PaginatedPosts,
   Post,
-  UpdatePostPayload
+  UpdatePostPayload,
 } from '../models/post.model';
+interface SearchResponse {
+  success: boolean;
+  message: number;
+  data: {
+    data: Post[];
+  };
+}
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -22,6 +29,10 @@ export class PostService {
     const params = new HttpParams().set('page', page).set('limit', limit);
     return this.http.get<ApiResponse<PaginatedPosts>>(this.baseUrl, { params });
   }
+  searchPosts(query: string): Observable<SearchResponse> {
+    const params = new HttpParams().set('q', query);
+    return this.http.get<SearchResponse>(`${this.baseUrl}/search`, { params });
+  }
 
   /** Note: the server currently returns an array here (Post.find, not findById). */
   getPostById(postId: string): Observable<ApiResponse<Post[]>> {
@@ -29,7 +40,10 @@ export class PostService {
   }
 
   updatePost(postId: string, payload: UpdatePostPayload): Observable<ApiResponse<Post>> {
-    return this.http.patch<ApiResponse<Post>>(`${this.baseUrl}/${postId}`, this.toFormData(payload));
+    return this.http.patch<ApiResponse<Post>>(
+      `${this.baseUrl}/${postId}`,
+      this.toFormData(payload),
+    );
   }
 
   deletePost(postId: string): Observable<ApiResponse<Post>> {
@@ -49,7 +63,7 @@ export class PostService {
       formData.append('altText', payload.altText);
     }
     // Field name must match the server's multer config: upload.array("media", 5)
-    (payload.files ?? []).forEach(file => formData.append('media', file));
+    (payload.files ?? []).forEach((file) => formData.append('media', file));
 
     return formData;
   }

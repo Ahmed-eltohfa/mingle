@@ -2,12 +2,13 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { PostService } from '../../post/services/post-service';
 import { Post } from '../../post/models/post.model';
+import { CreatePostComponent } from '../../post/pages/create-post.component';
 import { CommentComponent } from './comment/comment.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [DatePipe, CommentComponent],
+  imports: [DatePipe, CreatePostComponent, CommentComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
 })
@@ -18,12 +19,15 @@ export class HomePageComponent implements OnInit {
   protected readonly isLoading = signal(true);
 
   ngOnInit(): void {
+    this.loadPosts();
+  }
+
+  protected loadPosts(): void {
     this.postService.getPosts().subscribe({
       next: (response) => {
         // Reads the array from response.data.data per PaginatedPosts interface
         this.posts.set(response.data.data ?? []);
         this.isLoading.set(false);
-        console.log('Fetched posts:', this.posts());
       },
       error: (err) => {
         console.error('Failed to fetch posts:', err);
@@ -31,17 +35,34 @@ export class HomePageComponent implements OnInit {
       },
     });
   }
-  // Pass the populated author object from your post model
-  getAvatarUrl(author: { username?: string; avatar?: string } | null | undefined): string {
-    console.log('Author object:', author); // Debugging line to check the author object
-    if (author?.avatar) {
-      // Prepend server base URL if storing local upload paths like '/uploads/avatar.png'
-      return author.avatar.startsWith('http') 
-        ? author.avatar 
-        : `http://localhost:3000${author.avatar}`;
-    }
 
-    // Fallback seed using username or default string
-    return `https://picsum.photos/seed/${author?.username || 'mingle'}/80/80`;
+  protected onPostCreated(newPost: Post): void {
+    if (newPost) {
+      this.posts.update((current) => [newPost, ...current]);
+    }
+  }
+
+  protected getAuthorName(author: any): string {
+    if (!author) return 'Anonymous';
+    if (typeof author === 'object') {
+      return author.name || author.username || 'Anonymous';
+    }
+    return String(author);
+  }
+
+  protected getAuthorUsername(author: any): string {
+    if (typeof author === 'object' && author?.username) {
+      return author.username;
+    }
+    return '';
+  }
+
+  protected getAuthorAvatar(author: any): string {
+    if (typeof author === 'object' && author?.avatar) {
+      const avatar = author.avatar;
+      return avatar.startsWith('http') ? avatar : `http://localhost:3000${avatar}`;
+    }
+    const seed = typeof author === 'string' ? author : author?.username || 'user';
+    return `https://picsum.photos/seed/${seed}/80/80`;
   }
 }
