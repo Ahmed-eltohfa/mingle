@@ -1,0 +1,18 @@
+<aside class="side-nav">
+    <div class="brand-block">
+        <h1 class="brand-title">Mingle</h1>
+        <p class="brand-subtitle">Social Network</p>
+    </div>
+
+    <nav class="nav-list" aria-label="Primary">
+        @for (item of navItems; track item.route) {
+        <a class="nav-link" [routerLink]="item.route" routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }">
+            <span class="material-symbols-outlined nav-icon">{{ item.icon }}</span>
+            <span>{{ item.label }}</span>
+        </a>
+        }
+    </nav>
+
+    <a class="mingle-button-primary create-post" routerLink="/create">Create Post</a>
+</aside>

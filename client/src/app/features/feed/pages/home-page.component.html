@@ -1,0 +1,74 @@
+<div class="feed-page">
+  <app-create-post (created)="onPostCreated($event)"></app-create-post>
+
+  <section class="feed-list" aria-label="Feed posts">
+    @if (isLoading()) {
+      <div class="loading-spinner">Loading posts...</div>
+    } @else {
+      @for (post of posts(); track post._id) {
+        <article class="mingle-card post-card">
+          <header class="post-header">
+            <div class="identity">
+              <img
+                [src]="getAuthorAvatar(post.author)"
+                [alt]="getAuthorName(post.author) + ' avatar'"
+                loading="lazy"
+              />
+              <div>
+                <h3>{{ getAuthorName(post.author) }}</h3>
+                <p>{{ post.createdAt | date: 'shortTime' }}</p>
+              </div>
+            </div>
+
+            <button type="button" class="icon-button" aria-label="More options">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </button>
+          </header>
+
+          <p class="post-content">{{ post.content }}</p>
+
+          <!-- Media loop matching PostMedia interface -->
+          @if (post.media && post.media.length > 0) {
+            @for (item of post.media; track item.url) {
+              @if (item.type === 'video') {
+                <video
+                  class="post-image"
+                  [src]="'http://localhost:3000' + item.url"
+                  controls
+                ></video>
+              } @else {
+                <img
+                  class="post-image"
+                  [src]="'http://localhost:3000' + item.url"
+                  [alt]="item.altText || 'Post image'"
+                  loading="lazy"
+                />
+              }
+            }
+          }
+
+          <footer class="post-actions">
+            <button type="button">
+              <span class="material-symbols-outlined">favorite</span>
+              0
+            </button>
+            <button type="button">
+              <span class="material-symbols-outlined">chat_bubble</span>
+              0
+            </button>
+            <button type="button">
+              <span class="material-symbols-outlined">repeat</span>
+              0
+            </button>
+            <button type="button" class="bookmark" aria-label="Save post">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+          </footer>
+          <app-comment [postId]="post._id"></app-comment>
+        </article>
+      } @empty {
+        <p class="no-posts">No posts found yet.</p>
+      }
+    }
+  </section>
+</div>

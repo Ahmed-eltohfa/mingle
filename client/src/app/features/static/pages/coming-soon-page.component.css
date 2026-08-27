@@ -1,0 +1,58 @@
+:host {
+    display: block;
+}
+
+.placeholder-wrap {
+    min-height: 320px;
+    display: grid;
+    place-items: center;
+}
+
+.placeholder-card {
+    width: min(640px, 100%);
+    padding: 24px;
+}
+
+h1 {
+    margin: 12px 0;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+p {
+    margin: 0;
+    color: var(--on-surface-variant);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.actions .mingle-button-primary {
+    display: inline-grid;
+    place-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: var(--radius-pill);
+}
+
+.ghost-link {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 34px;
+    }
+
+    .actions {
+        flex-wrap: wrap;
+    }
+}

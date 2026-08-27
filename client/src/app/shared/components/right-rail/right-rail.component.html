@@ -1,0 +1,45 @@
+<aside class="right-rail">
+    @if (variant() === 'home') {
+    <section class="mingle-card rail-card">
+        <h2>Trending for you</h2>
+        <div class="stack-list">
+            @for (item of trending; track item.topic) {
+            <article>
+                <p class="meta">{{ item.category }} • Trending</p>
+                <p class="topic">{{ item.topic }}</p>
+                <p class="meta">{{ item.posts }}</p>
+            </article>
+            }
+        </div>
+        <a class="rail-link" href="#">Show more</a>
+    </section>
+    }
+
+    <section class="mingle-card rail-card">
+        <h2>@if (variant() === 'profile') {Suggested for you} @else {Who to follow}</h2>
+        <div class="stack-list">
+            @for (person of suggestions; track person.handle) {
+            <article class="suggestion-row">
+                <div class="who-left">
+                    <img [src]="person.avatar" [alt]="person.name + ' avatar'" loading="lazy" />
+                    <div>
+                        <p class="topic">{{ person.name }}</p>
+                        <p class="meta">{{ person.subtitle }}</p>
+                    </div>
+                </div>
+                <button type="button" class="follow-button">Follow</button>
+            </article>
+            }
+        </div>
+    </section>
+
+    @if (variant() === 'profile') {
+    <footer class="rail-footer">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <span>© 2026 Mingle</span>
+    </footer>
+    }
+</aside>

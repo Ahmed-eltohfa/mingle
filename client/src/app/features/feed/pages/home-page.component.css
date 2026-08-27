@@ -1,0 +1,117 @@
+:host {
+    display: block;
+}
+
+.feed-page {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+
+.feed-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.post-card {
+    overflow: hidden;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-3) var(--space-3) 0;
+}
+
+.identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.identity img {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    object-fit: cover;
+}
+
+.identity h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.identity p {
+    margin: 2px 0 0;
+    color: var(--on-surface-variant);
+    font-size: 13px;
+}
+
+.icon-button {
+    border: 0;
+    background: transparent;
+    color: var(--on-surface-variant);
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    background: var(--surface-low);
+}
+
+.post-content {
+    margin: var(--space-3);
+    margin-bottom: var(--space-2);
+    font-size: 18px;
+    line-height: 1.55;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: cover;
+    border-top: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
+    border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 70%, white);
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 12px var(--space-3);
+}
+
+.post-actions button {
+    border: 0;
+    background: transparent;
+    color: var(--on-surface-variant);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 6px 8px;
+    cursor: pointer;
+}
+
+.post-actions button:hover {
+    background: var(--surface-low);
+    color: var(--primary);
+}
+
+.bookmark {
+    margin-left: auto;
+}
+
+@media (max-width: 1023px) {
+    .feed-page {
+        padding-bottom: 72px;
+    }
+}
